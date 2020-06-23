@@ -34,16 +34,16 @@
                                     <p class="text-muted mb-4 mt-3">Enter your email address and password to access admin panel.</p>
                                 </div>
 
-                                <form action="#">
+                                <form action="<?= base_url('signin') ?>" role="form" method="post" accept-charset="utf-8">
 
                                     <div class="form-group mb-3">
-                                        <label for="emailaddress">Email address</label>
-                                        <input class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
+                                        <label for="username">Email address</label>
+                                        <input class="form-control" type="email" name="username" id="username" required="" placeholder="Enter your username">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label for="password">Password</label>
-                                        <input class="form-control" type="password" required="" id="password" placeholder="Enter your password">
+                                        <input class="form-control" type="password" name="password" id="password" required="" placeholder="Enter your password">
                                     </div>
 
                                     <div class="form-group mb-3">
