@@ -36,6 +36,11 @@ $routes->get('/users', 'Login::index');
 
 $routes->post('/signin', 'Login::signin');
 
+
+//API CALL
+//$routes->get('/api/signin', 'Login::api_signin');
+$routes->post('/api/signin', 'Login::api_signin');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

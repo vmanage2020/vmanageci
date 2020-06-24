@@ -5,7 +5,6 @@ use CodeIgniter\Controller;
 
 class Login extends Controller {
 
-    
     public function signin()
 	{
         
@@ -38,6 +37,94 @@ class Login extends Controller {
         }
         
         
+    }
+ 
+    public function api_signin()
+	{
+        /*
+        $data['function'] = "api_signin";
+
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method == "OPTIONS") {
+        die();
+        }
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+        */
+        
+        $jsondata = json_decode(file_get_contents('php://input'), true);
+        $username = $jsondata['username'];
+        $password = $jsondata['password'];
+
+        $data['json'] = $jsondata;
+        $data['function'] = "api_signin";
+
+        $model = new UserModel();
+
+        if (!$username)
+        {
+            $data['error'] = true;
+            $data['message'] = "Validation Error.";
+        }
+        else
+        {
+            $data['success'] = true;
+            
+            $where = array(
+                'users_name' => $username,
+                'users_pwd' => $password
+            );
+            $data['user'] = $model->checkUsers($where);
+       
+            if($data['user'])
+            {
+                $data['message'] = "Login Success.";
+            }
+            else
+            {
+                $data['message'] = "Login Error.";
+            }
+            
+        }
+    
+        //return json_encode($data);
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+        
+    }
+
+
+    public function index()
+    {
+
+        $model = new UserModel();
+
+        $data['news'] = $model->getUsers();
+
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+
+        //return json_encode($data, JSON_PRETTY_PRINT);
+
+        //header('Content-Type: application/json');
+        //echo json_encode( $data );
+
+        /*
+        return $this->output
+        ->set_content_type('application/json')
+        ->set_status_header(200) // Return status
+        ->set_output(json_encode(array($data)));
+        */
     }
     
     /*
