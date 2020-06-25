@@ -41,6 +41,13 @@ $routes->post('/signin', 'Login::signin');
 //$routes->get('/api/signin', 'Login::api_signin');
 $routes->post('/api/signin', 'Login::api_signin');
 
+//STUDENT API CALLs
+$routes->get('/api/students', 'Student::index');
+$routes->post('/api/student', 'Student::create');
+$routes->get('/api/student/(:any)', 'Student::view/$1');
+$routes->put('/api/student/(:any)', 'Student::update/$1');
+$routes->delete('/api/student/(:any)', 'Student::delete/$1');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
