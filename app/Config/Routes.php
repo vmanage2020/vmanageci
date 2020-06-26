@@ -41,6 +41,9 @@ $routes->post('/signin', 'Login::signin');
 //$routes->get('/api/signin', 'Login::api_signin');
 $routes->post('/api/signin', 'Login::api_signin');
 
+//Master
+$routes->get('/api/academicboard', 'Master::academicboard');
+
 //STUDENT API CALLs
 $routes->get('/api/students', 'Student::index');
 $routes->post('/api/student', 'Student::create');

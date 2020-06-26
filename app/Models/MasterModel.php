@@ -2,23 +2,23 @@
 
 use CodeIgniter\Model;
 
-class StudentModel extends Model
+class MasterModel extends Model
 {
-    protected $table = 'ac_ms_student_profile';
+    protected $board_table = 'ac_ms_board_cor_info';
 	
-	
-    public function viewRow($data)
+	public function saveBoard($data)
+	{
+		$query = $this->db->table($this->table)->insert($data);
+        return $query;
+	}
+    /* public function viewRow($data)
     {
     
         return $this->where($data)
                 ->first();
     }
     
-    public function updateStudent( $data, $id)
-    {
-        $query = $this->db->table($this->table)->update($data, array('stu_prf_id_pk' => $id));
-        return $query;
-    }
+	
 	public function saveStudent($data)
 	{
 		$query = $this->db->table($this->table)->insert($data);
@@ -33,5 +33,7 @@ class StudentModel extends Model
         return $this->findAll();
     }
 
-    }
+    } */
+
+
 }
