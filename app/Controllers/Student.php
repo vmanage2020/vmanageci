@@ -140,9 +140,21 @@ class Student extends Controller {
 		
 		//echo '<pre>data->';print_r($data);die;
         
-        
-        $insertedData = $model->saveStudent($data);
-			echo '<pre>$insertedData->';print_r($insertedData);die;
+		$insertedData = $model->saveStudent($data);
+		//echo '<pre>$insertedData->';print_r($insertedData);
+		$insertedID = $insertedData->connID->insert_id;
+		if($insertedID>0)
+		{
+			$lastInsertId = $insertedID;
+			$data['return']['insertid'] = $insertedID;
+			$data['return']['message'] = "Inserted Success";
+		}
+		else
+		{
+			$data['return']['message'] = "Error on Insert";
+		}
+		
+		//echo '<pre>$insertedData->';print_r($insertedData);die;
 
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
