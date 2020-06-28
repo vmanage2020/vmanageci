@@ -50,6 +50,7 @@ $routes->delete('/api/academicboard/delete/(:any)', 'Master::academicboard/delet
 
 //STUDENT API CALLs
 $routes->get('/api/students', 'Student::index');
+$routes->get('/api/student/(:any)', 'Student::getbyid/$1');
 $routes->post('/api/student', 'Student::create');
 $routes->get('/api/student/(:any)', 'Student::view/$1');
 $routes->put('/api/student/(:any)', 'Student::update/$1');
