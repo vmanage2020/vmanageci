@@ -13,6 +13,17 @@ class StudentContactModel extends Model
                 ->first();
     }
     
+    public function updateStudent( $data, $id)
+    {
+        $query = $this->db->table($this->table)->update($data, array('stu_prf_id_pk' => $id));
+        return $query;
+    }
+	public function saveStudent($data)
+	{
+		$query = $this->db->table($this->table)->insert($data);
+        return $query;
+    }
+    
     public function getRows($status = false)
     {
 

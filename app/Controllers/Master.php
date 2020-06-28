@@ -24,15 +24,15 @@ class Master extends Controller {
     }
     
   
-    public function academicboard($id=null)
+    public function academicboard($type=null,$id=null)
     {
         $data['function'] = "api_academic_board";
         $model = new MasterModel();
 
-		if( $id == null)
-		{
+		$jsondata = json_decode(file_get_contents('php://input'), true);
 
-			$jsondata = json_decode(file_get_contents('php://input'), true);
+		if( $id == null && $type=="add")
+		{
 			
 			$data = array(
 				"board_cor_name" => $jsondata["board_cor_name"],
@@ -59,9 +59,42 @@ class Master extends Controller {
 				$data['return']['message'] = "Error on Insert";
 			}
 		}
-		else if( $id != null)
+		else if( $id != null && $type=="update")
 		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
 
+			$updatedData = $model->updateBoard($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}else if( $id != null && $type=="delete")
+		{
+			
+			$delData = $model->delRow($id);
+			$affectedRows = $delData->connID->affected_rows;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}elseif( !$id && !$type )
+		{
+			
+			$data['academic_boards'] = $model->getRows();
+			
 		}
         /* $where = array(
             'stu_prf_id_pk' => $id
