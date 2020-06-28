@@ -54,10 +54,6 @@ class Student extends Controller {
 		
 
 		
-<<<<<<< HEAD
-		
-=======
->>>>>>> 179f514ee34431c209b701199d1a41e05aa98dce
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
 				"stu_prf_stud_name" => $jsondata["stu_prf_stud_name"],
@@ -221,11 +217,7 @@ class Student extends Controller {
 					}
 
 					$studentCert = $studentCertificateModel->saveStudent($studentCertificate);
-<<<<<<< HEAD
-					
-=======
 					//echo '<pre>$studentCert->';print_r($studentCert);die;
->>>>>>> 179f514ee34431c209b701199d1a41e05aa98dce
 				}
 
 				$lastInsertId = $insertedContactStudID;
@@ -264,7 +256,6 @@ class Student extends Controller {
                 'slug'  => url_title($this->request->getVar('title'), '-', TRUE),
                 'body'  => $this->request->getVar('body'),
             ]);
-
             echo view('news/success');
         }
         */
@@ -273,9 +264,10 @@ class Student extends Controller {
 	public function update($id)
     {
 
-		$data['function'] = "api_save_student";
+		$data['function'] = "api_update_student";
         $model = new StudentModel();
 		$contactModel = new StudentContactModel();
+		$studentCertificateModel = new StudentCertificateModel();
 
         $jsondata = json_decode(file_get_contents('php://input'), true);
 		
@@ -399,6 +391,36 @@ class Student extends Controller {
 			$updatedContactData =  $contactModel->updateStudent($contactData, $id);
 			if( $updatedContactData )
 			{
+
+				$student_documents = $jsondata["student_documents"];
+				if( sizeof($student_documents) > 0)
+				{	
+					$studentCertificate = array();
+					foreach($student_documents as $doc)
+					{
+						
+						$studentCertificate[] = array(
+							"col_code_fk" => $doc["col_code_fk"],
+							"stu_prf_code_fk" => $insertedID,
+							"cert_code_fk" => $doc["cert_code_fk"],
+							"crt_cert_date" => $doc["crt_cert_date"],
+							"crt_cert_no" => $doc["crt_cert_no"],
+							"crt_returned" => $doc["crt_returned"],
+							"crt_collected" => $doc["crt_collected"],
+							"crt_attach" => $doc["crt_attach"],							
+							"status" => 0,
+							"create_date" => date('Y-m-d H:i:s'),
+							"create_by" => 6,
+							"edit_date" => date('Y-m-d H:i:s'),
+							"edit_by" => 0,
+						);
+						
+					}
+
+					$studentCert = $studentCertificateModel->saveStudent($studentCertificate);
+					//echo '<pre>$studentCert->';print_r($studentCert);die;
+				}
+
 				//$data['return']['insertid'] = $id;
 				$data['return']['message'] = "Updated Success";
 			}
@@ -417,6 +439,44 @@ class Student extends Controller {
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
 		echo json_encode($data, JSON_NUMERIC_CHECK);
 		
+	}
+
+	public function delete($id)
+    {
+
+		$data['function'] = "api_delete_student";
+        $model = new StudentModel();
+		$contactModel = new StudentContactModel();
+		$studentCertificateModel = new StudentCertificateModel();
+
+		if( $id != null)
+		{
+			$delStudData = $model->delRow($id);
+			$affectedStudRows = $delStudData->connID->affected_rows;
+			if( $affectedStudRows )
+			{
+				$delStudContData = $contactModel->delRow($id);
+				$affectedStudContRows = $delStudContData->connID->affected_rows;
+
+				if( $affectedStudContRows )
+				{
+					$delStudCertData = $studentCertificateModel->delRow($id);
+					$affectedStudDocuRows = $delStudCertData->connID->affected_rows;	
+					if( $affectedStudDocuRows )
+					{
+						$data['return']['message'] = "Deleted Success";
+					}
+				}
+			}
+		}else{
+			$data['return']['message'] = "Error on delete";
+		}
+
+		header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
 	}
     
 
