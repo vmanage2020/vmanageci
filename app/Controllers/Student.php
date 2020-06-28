@@ -144,6 +144,14 @@ class Student extends Controller {
 		$insertedData = $model->saveStudent($data);
 		//echo '<pre>$insertedData->';print_r($insertedData);
 		$insertedID = $insertedData->connID->insert_id;
+
+		if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+
 		if($insertedID>0)
 		{
 
@@ -179,9 +187,9 @@ class Student extends Controller {
 			
 			if($insertedContactStudID>0)
 			{
-				$lastInsertId = $insertedID;
-				$data['return']['insertid'] = $insertedID;
-				$data['return']['message'] = "Inserted Success";
+				$lastInsertId = $insertedContactStudID;
+				$data['return']['contactinsertid'] = $insertedContactStudID;
+				$data['return']['contactmessage'] = "Contact Inserted Success";
 			}
 			
 		}
