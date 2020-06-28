@@ -5,13 +5,19 @@ use CodeIgniter\Model;
 class StudentModel extends Model
 {
     protected $table = 'ac_ms_student_profile';
+
+    protected $contact_table = 'ac_ms_student_condact';
+
+   protected $certificate_table = 'ac_ms_student_cert';
 	
 	
-    public function viewRow($data)
+    public function viewRow($id)
     {
-    
-        return $this->where($data)
-                ->first();
+
+        $sql = 'select * from '.$this->table.' a LEFT JOIN '.$this->contact_table.' b ON a.stu_prf_id_pk= b.stu_prf_code_fk LEFT JOIN '.$this->certificate_table.' c ON  a.stu_prf_id_pk= c.stu_prf_code_fk where a.stu_prf_id_pk ='.$id;
+      $query =  $this->db->query($sql);
+      
+      return $query->getRow();
     }
     
     public function updateStudent( $data, $id)

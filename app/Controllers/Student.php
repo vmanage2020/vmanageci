@@ -27,14 +27,16 @@ class Student extends Controller {
     public function view($id=null)
     {
         $data['function'] = "api_view_student";
-        $model = new StudentModel();
+		$model = new StudentModel();
+		$contactModel = new StudentContactModel();
+		$studentCertificateModel = new StudentCertificateModel();
 
-        $where = array(
+        /* $where = array(
             'stu_prf_id_pk' => $id
         );
-        $data['where'] = $where;
+        $data['where'] = $where; */
 
-        $data['user'] = $model->viewRow($where);
+        $data['student'] = $model->viewRow($id);
         
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
