@@ -43,6 +43,9 @@ $routes->post('/api/signin', 'Login::api_signin');
 
 //Master
 $routes->get('/api/academicboard', 'Master::academicboard');
+$routes->post('/api/academicboard/add', 'Master::academicboard/add');
+$routes->put('/api/academicboard/update/(:any)', 'Master::academicboard/update/$1');
+$routes->delete('/api/academicboard/delete/(:any)', 'Master::academicboard/delete/$1');
 
 //STUDENT API CALLs
 $routes->get('/api/students', 'Student::index');

@@ -46,7 +46,8 @@ class Student extends Controller {
     public function create()
     {
         $data['function'] = "api_save_student";
-        $model = new StudentModel();
+		$model = new StudentModel();
+		$contactModel = new StudentContactModel();
 
         $jsondata = json_decode(file_get_contents('php://input'), true);
 		
@@ -145,9 +146,44 @@ class Student extends Controller {
 		$insertedID = $insertedData->connID->insert_id;
 		if($insertedID>0)
 		{
-			$lastInsertId = $insertedID;
-			$data['return']['insertid'] = $insertedID;
-			$data['return']['message'] = "Inserted Success";
+
+			$contactData = array(
+				"col_code_fk" => trim($jsondata["col_code_fk"]),
+				"stu_prf_code_fk" => $insertedID,
+				"con_per_add" => trim($jsondata["con_per_add"]),
+				"con_per_state" => trim($jsondata["con_per_state"]),
+				"con_per_cntry" => trim($jsondata["con_per_cntry"]),
+				"con_per_pincode" => trim($jsondata["con_per_pincode"]),
+				"con_per_phone" => trim($jsondata["con_per_phone"]),
+				"con_cont_add" => trim($jsondata["con_cont_add"]),
+				"con_cont_state" => trim($jsondata["con_cont_state"]),
+				"con_cont_cntry" => trim($jsondata["con_cont_cntry"]),				
+				"con_cont_pincode" => trim($jsondata["con_cont_pincode"]),
+				"con_cont_phone" => trim($jsondata["con_cont_phone"]),
+				"con_experience" => trim($jsondata["con_experience"]),
+				"con_interrupt" => trim($jsondata["con_interrupt"]),
+				"con_identify_marks" => trim($jsondata["con_identify_marks"]),
+				"con_rel_info" => trim($jsondata["con_rel_info"]),
+				"con_mode" => trim($jsondata["con_mode"]),
+				"con_rail_stn" => trim($jsondata["con_rail_stn"]),
+				"status" => 0,
+				"create_date" => date('Y-m-d H:i:s'),
+				"create_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0
+			);
+
+			
+			$insertedContactData = $contactModel->saveStudent($contactData);
+			$insertedContactStudID = $insertedContactData->connID->insert_id;		
+			
+			if($insertedContactStudID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+			
 		}
 		else
 		{
@@ -190,6 +226,7 @@ class Student extends Controller {
 
 		$data['function'] = "api_save_student";
         $model = new StudentModel();
+		$contactModel = new StudentContactModel();
 
         $jsondata = json_decode(file_get_contents('php://input'), true);
 		
@@ -286,8 +323,37 @@ class Student extends Controller {
 		if( $updatedData )
 		{
 			$lastInsertId = $id;
-			//$data['return']['insertid'] = $id;
-			$data['return']['message'] = "Updated Success";
+
+			$contactData = array(
+				"col_code_fk" => trim($jsondata["col_code_fk"]),
+				"stu_prf_code_fk" => $id,
+				"con_per_add" => trim($jsondata["con_per_add"]),
+				"con_per_state" => trim($jsondata["con_per_state"]),
+				"con_per_cntry" => trim($jsondata["con_per_cntry"]),
+				"con_per_pincode" => trim($jsondata["con_per_pincode"]),
+				"con_per_phone" => trim($jsondata["con_per_phone"]),
+				"con_cont_add" => trim($jsondata["con_cont_add"]),
+				"con_cont_state" => trim($jsondata["con_cont_state"]),
+				"con_cont_cntry" => trim($jsondata["con_cont_cntry"]),				
+				"con_cont_pincode" => trim($jsondata["con_cont_pincode"]),
+				"con_cont_phone" => trim($jsondata["con_cont_phone"]),
+				"con_experience" => trim($jsondata["con_experience"]),
+				"con_interrupt" => trim($jsondata["con_interrupt"]),
+				"con_identify_marks" => trim($jsondata["con_identify_marks"]),
+				"con_rel_info" => trim($jsondata["con_rel_info"]),
+				"con_mode" => trim($jsondata["con_mode"]),
+				"con_rail_stn" => trim($jsondata["con_rail_stn"]),
+				"edit_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0
+			);
+
+			$updatedContactData =  $contactModel->updateStudent($contactData, $id);
+			if( $updatedContactData )
+			{
+				//$data['return']['insertid'] = $id;
+				$data['return']['message'] = "Updated Success";
+			}
+			
 		}
 		else
 		{
