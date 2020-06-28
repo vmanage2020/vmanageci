@@ -53,35 +53,7 @@ class Student extends Controller {
         $jsondata = json_decode(file_get_contents('php://input'), true);
 		
 
-		$student_documents = $jsondata["student_documents"];
-		if( sizeof($student_documents) > 0)
-		{	
-			$studentCertificate = array();
-			foreach($student_documents as $doc)
-			{
-				
-				$studentCertificate[] = array(
-					"col_code_fk" => $doc["col_code_fk"],
-					"stu_prf_code_fk" => 1,
-					"cert_code_fk" => $doc["col_code_fk"],
-					"crt_cert_date" => $doc["col_code_fk"],
-					"crt_cert_no" => $doc["col_code_fk"],
-					"crt_returned" => $doc["col_code_fk"],
-					"crt_collected" => $doc["col_code_fk"],
-					"crt_attach" => $doc["col_code_fk"],
-					"status" => 0,
-					"create_date" => date('Y-m-d H:i:s'),
-					"create_by" => 6,
-					"edit_date" => date('Y-m-d H:i:s'),
-					"edit_by" => 0,
-				);
-				
-			}
-
-			$studentCert = $studentCertificateModel->saveStudent($studentCertificate);
-			echo '<pre>$studentCert->';print_r($studentCert);die;
-		}
-		die;
+		
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
 				"stu_prf_stud_name" => $jsondata["stu_prf_stud_name"],
@@ -219,28 +191,34 @@ class Student extends Controller {
 			if($insertedContactStudID>0)
 			{
 
-				/* $student_documents = $jsondata["student_documents"];
+				$student_documents = $jsondata["student_documents"];
 				if( sizeof($student_documents) > 0)
 				{	
+					$studentCertificate = array();
 					foreach($student_documents as $doc)
 					{
-						echo '<pre>';print_r($doc)
+						
+						$studentCertificate[] = array(
+							"col_code_fk" => $doc["col_code_fk"],
+							"stu_prf_code_fk" => $insertedID,
+							"cert_code_fk" => $doc["col_code_fk"],
+							"crt_cert_date" => $doc["col_code_fk"],
+							"crt_cert_no" => $doc["col_code_fk"],
+							"crt_returned" => $doc["col_code_fk"],
+							"crt_collected" => $doc["col_code_fk"],
+							"crt_attach" => $doc["col_code_fk"],
+							"status" => 0,
+							"create_date" => date('Y-m-d H:i:s'),
+							"create_by" => 6,
+							"edit_date" => date('Y-m-d H:i:s'),
+							"edit_by" => 0,
+						);
+						
 					}
-					 	col_code_fk: 1
-						stu_prf_code_fk: 4
-						cert_code_fk: 1
-						crt_cert_date: 2017-06-07
-							crt_cert_no: 101
-						crt_returned: 0
-						crt_collected: 0
-							crt_attach: 1591502613_C:fakepathmisic 1.jpg
-								status: 0
-							create_date: 2020-06-07 00:03:33
-							create_by: 6
-							edit_date: 0000-00-00 00:00:00
-								edit_by: 0
 
-				} */
+					$studentCert = $studentCertificateModel->saveStudent($studentCertificate);
+					//echo '<pre>$studentCert->';print_r($studentCert);die;
+				}
 
 				$lastInsertId = $insertedContactStudID;
 				$data['return']['contactinsertid'] = $insertedContactStudID;
