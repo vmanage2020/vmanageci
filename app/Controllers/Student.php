@@ -256,7 +256,6 @@ class Student extends Controller {
                 'slug'  => url_title($this->request->getVar('title'), '-', TRUE),
                 'body'  => $this->request->getVar('body'),
             ]);
-
             echo view('news/success');
         }
         */
