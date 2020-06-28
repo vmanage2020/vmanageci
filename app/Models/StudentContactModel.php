@@ -33,4 +33,9 @@ class StudentContactModel extends Model
     }
 
     }
+
+    public function delRow($id)
+    {
+       return $this->db->table($this->table)->where('stu_prf_id_pk', $id)->delete(); 
+    }
 }
