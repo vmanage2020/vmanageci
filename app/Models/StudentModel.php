@@ -14,7 +14,9 @@ class StudentModel extends Model
     public function viewRow($id)
     {
 
-        $sql = 'select * from '.$this->table.' a LEFT JOIN '.$this->contact_table.' b ON a.stu_prf_id_pk= b.stu_prf_code_fk LEFT JOIN '.$this->certificate_table.' c ON  a.stu_prf_id_pk= c.stu_prf_code_fk where a.stu_prf_id_pk ='.$id;
+      //$sql = 'select * from '.$this->table.' a LEFT JOIN '.$this->contact_table.' b ON a.stu_prf_id_pk= b.stu_prf_code_fk LEFT JOIN '.$this->certificate_table.' c ON  a.stu_prf_id_pk= c.stu_prf_code_fk where a.stu_prf_id_pk ='.$id;
+
+      $sql = 'select * from '.$this->table.' a LEFT JOIN '.$this->contact_table.' b ON a.stu_prf_id_pk= b.stu_prf_code_fk where a.stu_prf_id_pk ='.$id;
       $query =  $this->db->query($sql);
       
       return $query->getRow();

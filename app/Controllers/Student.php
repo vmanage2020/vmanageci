@@ -36,7 +36,8 @@ class Student extends Controller {
         );
         $data['where'] = $where; */
 
-        $data['student'] = $model->viewRow($id);
+		$data['student'] = $model->viewRow($id);
+		$data['studentdocument'] = $studentCertificateModel->viewsRowByStudent($id);
         
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
