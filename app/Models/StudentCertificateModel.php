@@ -13,6 +13,12 @@ class StudentCertificateModel extends Model
                 ->first();
     }
     
+    public function saveStudent($data)
+	{
+		$query = $this->db->table($this->table)->insertBatch($data);
+        return $query;
+    }
+    
     public function getRows($status = false)
     {
 
