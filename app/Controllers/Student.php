@@ -54,7 +54,10 @@ class Student extends Controller {
 		
 
 		
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 179f514ee34431c209b701199d1a41e05aa98dce
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
 				"stu_prf_stud_name" => $jsondata["stu_prf_stud_name"],
@@ -202,12 +205,12 @@ class Student extends Controller {
 						$studentCertificate[] = array(
 							"col_code_fk" => $doc["col_code_fk"],
 							"stu_prf_code_fk" => $insertedID,
-							"cert_code_fk" => $doc["col_code_fk"],
+							"cert_code_fk" => $doc["cert_code_fk"],
 							"crt_cert_date" => $doc["crt_cert_date"],
 							"crt_cert_no" => $doc["crt_cert_no"],
 							"crt_returned" => $doc["crt_returned"],
 							"crt_collected" => $doc["crt_collected"],
-							"crt_attach" => $doc["crt_attach"],
+							"crt_attach" => $doc["crt_attach"],							
 							"status" => 0,
 							"create_date" => date('Y-m-d H:i:s'),
 							"create_by" => 6,
@@ -218,7 +221,11 @@ class Student extends Controller {
 					}
 
 					$studentCert = $studentCertificateModel->saveStudent($studentCertificate);
+<<<<<<< HEAD
 					
+=======
+					//echo '<pre>$studentCert->';print_r($studentCert);die;
+>>>>>>> 179f514ee34431c209b701199d1a41e05aa98dce
 				}
 
 				$lastInsertId = $insertedContactStudID;
