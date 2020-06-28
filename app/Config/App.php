@@ -21,7 +21,7 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://localhost/UmaSankar/vmanageci-4/public/';
+	public $baseURL = 'http://localhost/vmanageci/public/';
 
 	/*
 	|--------------------------------------------------------------------------

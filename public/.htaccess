@@ -16,7 +16,7 @@ Options All -Indexes
 	# http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewritebase
 	# RewriteBase /
 
-	RewriteBase /UmaSankar/vmanageci-4/public/
+	RewriteBase /vmanageci/public/
 
 	# Redirect Trailing Slashes...
 	RewriteCond %{REQUEST_FILENAME} !-d

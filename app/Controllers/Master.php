@@ -95,6 +95,13 @@ class Master extends Controller {
 			
 			$data['academic_boards'] = $model->getRows();
 			
+		}elseif( $type != null && !$id )
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($type)
+			);
+			$data['academic_boards'] = $model->getById($where);
+			
 		}
         /* $where = array(
             'stu_prf_id_pk' => $id
