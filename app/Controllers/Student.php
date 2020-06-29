@@ -377,6 +377,7 @@ class Student extends Controller {
 				"edit_by" => 0
 		);
 		
+		
 		//echo '<pre>data->';print_r($data);die;
         
 		$updatedData = $model->updateStudent($data, $id);
