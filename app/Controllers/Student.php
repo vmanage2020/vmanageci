@@ -56,6 +56,7 @@ class Student extends Controller {
         $jsondata = json_decode(file_get_contents('php://input'), true);
 		
 
+		$jsondata["stu_prf_app_date"] = date("Y-m-d");
 		
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
