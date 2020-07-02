@@ -59,6 +59,8 @@ $routes->delete('/api/student/(:any)', 'Student::delete/$1');
 $routes->post('/api/student/update/(:any)', 'Student::update/$1');
 $routes->post('/api/student/delete/(:any)', 'Student::delete/$1');
 
+$routes->post('/api/student/upload', 'Student::upload');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
