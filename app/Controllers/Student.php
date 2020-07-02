@@ -55,7 +55,12 @@ class Student extends Controller {
 
         $jsondata = json_decode(file_get_contents('php://input'), true);
 		
-
+		if($jsondata["stu_prf_co_curr"]){
+			$stu_prf_co_curr = implode(",",$jsondata["stu_prf_co_curr"]);
+		} else {
+			$stu_prf_co_curr = "";
+		}
+		
 		$jsondata["stu_prf_app_date"] = date("Y-m-d");
 		
 		$data = array(
@@ -98,7 +103,7 @@ class Student extends Controller {
 				"stu_prf_plc_of_birth" => $jsondata["stu_prf_plc_of_birth"],
 				"stu_prf_parents_handicap" => $jsondata["stu_prf_parents_handicap"],
 				"stu_prf_parents_old_stu" => $jsondata["stu_prf_parents_old_stu"],
-				"stu_prf_co_curr" => $jsondata["stu_prf_co_curr"],
+				"stu_prf_co_curr" => $stu_prf_co_curr,
 				"stu_prf_mem_of_serv_org" => $jsondata["stu_prf_mem_of_serv_org"],
 				"stu_prf_family_size" => $jsondata["stu_prf_family_size"],
 				"stu_prf_community_fk" => $jsondata["stu_prf_community_fk"],
@@ -284,6 +289,12 @@ class Student extends Controller {
 
         $jsondata = json_decode(file_get_contents('php://input'), true);
 		
+		if($jsondata["stu_prf_co_curr"]){
+			$stu_prf_co_curr = implode(",",$jsondata["stu_prf_co_curr"]);
+		} else {
+			$stu_prf_co_curr = "";
+		}
+		
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
 				"stu_prf_stud_name" => $jsondata["stu_prf_stud_name"],
@@ -293,9 +304,6 @@ class Student extends Controller {
 				"stu_prf_sex" => $jsondata["stu_prf_sex"],
 				"stu_prf_mar_status" => $jsondata["stu_prf_mar_status"],
 				"stu_prf_roll_No" => $jsondata["stu_prf_roll_No"],
-				"stu_prf_app_No" => $jsondata["stu_prf_app_No"],
-				"stu_prf_app_name" => $jsondata["stu_prf_app_name"],
-				"stu_prf_app_date" => $jsondata["stu_prf_app_date"],
 				"stu_prf_quota" => $jsondata["stu_prf_quota"],
 				"stu_prf_current_Year" => $jsondata["stu_prf_current_Year"],
 				"stu_prf_current_batch" => $jsondata["stu_prf_current_batch"],
@@ -324,7 +332,7 @@ class Student extends Controller {
 				"stu_prf_plc_of_birth" => $jsondata["stu_prf_plc_of_birth"],
 				"stu_prf_parents_handicap" => $jsondata["stu_prf_parents_handicap"],
 				"stu_prf_parents_old_stu" => $jsondata["stu_prf_parents_old_stu"],
-				"stu_prf_co_curr" => $jsondata["stu_prf_co_curr"],
+				"stu_prf_co_curr" => $stu_prf_co_curr,
 				"stu_prf_mem_of_serv_org" => $jsondata["stu_prf_mem_of_serv_org"],
 				"stu_prf_family_size" => $jsondata["stu_prf_family_size"],
 				"stu_prf_community_fk" => $jsondata["stu_prf_community_fk"],
