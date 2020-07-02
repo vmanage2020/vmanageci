@@ -36,7 +36,8 @@ class Student extends Controller {
         );
         $data['where'] = $where; */
 
-        $data['student'] = $model->viewRow($id);
+		$data['student'] = $model->viewRow($id);
+		$data['studentdocument'] = $studentCertificateModel->viewsRowByStudent($id);
         
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
@@ -54,7 +55,13 @@ class Student extends Controller {
 
         $jsondata = json_decode(file_get_contents('php://input'), true);
 		
-
+		if($jsondata["stu_prf_co_curr"]){
+			$stu_prf_co_curr = implode(",",$jsondata["stu_prf_co_curr"]);
+		} else {
+			$stu_prf_co_curr = "";
+		}
+		
+		$jsondata["stu_prf_app_date"] = date("Y-m-d");
 		
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
@@ -96,7 +103,7 @@ class Student extends Controller {
 				"stu_prf_plc_of_birth" => $jsondata["stu_prf_plc_of_birth"],
 				"stu_prf_parents_handicap" => $jsondata["stu_prf_parents_handicap"],
 				"stu_prf_parents_old_stu" => $jsondata["stu_prf_parents_old_stu"],
-				"stu_prf_co_curr" => $jsondata["stu_prf_co_curr"],
+				"stu_prf_co_curr" => $stu_prf_co_curr,
 				"stu_prf_mem_of_serv_org" => $jsondata["stu_prf_mem_of_serv_org"],
 				"stu_prf_family_size" => $jsondata["stu_prf_family_size"],
 				"stu_prf_community_fk" => $jsondata["stu_prf_community_fk"],
@@ -137,6 +144,15 @@ class Student extends Controller {
 				"stu_prf_third_lang" => $jsondata["stu_prf_third_lang"],
 				"stu_adm_fee_coll" => $jsondata["stu_adm_fee_coll"],
 				"stu_adm_refno" => $jsondata["stu_adm_refno"],
+				"stu_prf_medical" => $jsondata["stu_prf_medical"],
+				"stu_prf_bus" => $jsondata["stu_prf_bus"],
+				"stu_prf_stu_aadhar" => $jsondata["stu_prf_stu_aadhar"],
+				"stu_prf_stu_emis" => $jsondata["stu_prf_stu_emis"],
+				"stu_prf_stu_bank" => $jsondata["stu_prf_stu_bank"],
+				"stu_prf_guardian_aadhar" => $jsondata["stu_prf_guardian_aadhar"],
+				"stu_prev_degree_code" => $jsondata["stu_prev_degree_code"],
+				"stu_prev_medium_ins_fk" => $jsondata["stu_prev_medium_ins_fk"],
+				"stu_adm_prev_class" => $jsondata["stu_adm_prev_class"],
 				"status" => 0,
 				"create_date" => date('Y-m-d H:i:s'),
 				"create_by" => 1,
@@ -273,6 +289,12 @@ class Student extends Controller {
 
         $jsondata = json_decode(file_get_contents('php://input'), true);
 		
+		if($jsondata["stu_prf_co_curr"]){
+			$stu_prf_co_curr = implode(",",$jsondata["stu_prf_co_curr"]);
+		} else {
+			$stu_prf_co_curr = "";
+		}
+		
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
 				"stu_prf_stud_name" => $jsondata["stu_prf_stud_name"],
@@ -282,9 +304,6 @@ class Student extends Controller {
 				"stu_prf_sex" => $jsondata["stu_prf_sex"],
 				"stu_prf_mar_status" => $jsondata["stu_prf_mar_status"],
 				"stu_prf_roll_No" => $jsondata["stu_prf_roll_No"],
-				"stu_prf_app_No" => $jsondata["stu_prf_app_No"],
-				"stu_prf_app_name" => $jsondata["stu_prf_app_name"],
-				"stu_prf_app_date" => $jsondata["stu_prf_app_date"],
 				"stu_prf_quota" => $jsondata["stu_prf_quota"],
 				"stu_prf_current_Year" => $jsondata["stu_prf_current_Year"],
 				"stu_prf_current_batch" => $jsondata["stu_prf_current_batch"],
@@ -313,7 +332,7 @@ class Student extends Controller {
 				"stu_prf_plc_of_birth" => $jsondata["stu_prf_plc_of_birth"],
 				"stu_prf_parents_handicap" => $jsondata["stu_prf_parents_handicap"],
 				"stu_prf_parents_old_stu" => $jsondata["stu_prf_parents_old_stu"],
-				"stu_prf_co_curr" => $jsondata["stu_prf_co_curr"],
+				"stu_prf_co_curr" => $stu_prf_co_curr,
 				"stu_prf_mem_of_serv_org" => $jsondata["stu_prf_mem_of_serv_org"],
 				"stu_prf_family_size" => $jsondata["stu_prf_family_size"],
 				"stu_prf_community_fk" => $jsondata["stu_prf_community_fk"],
@@ -354,9 +373,19 @@ class Student extends Controller {
 				"stu_prf_third_lang" => $jsondata["stu_prf_third_lang"],
 				"stu_adm_fee_coll" => $jsondata["stu_adm_fee_coll"],
 				"stu_adm_refno" => $jsondata["stu_adm_refno"],
+				"stu_prf_medical" => $jsondata["stu_prf_medical"],
+				"stu_prf_bus" => $jsondata["stu_prf_bus"],
+				"stu_prf_stu_aadhar" => $jsondata["stu_prf_stu_aadhar"],
+				"stu_prf_stu_emis" => $jsondata["stu_prf_stu_emis"],
+				"stu_prf_stu_bank" => $jsondata["stu_prf_stu_bank"],
+				"stu_prf_guardian_aadhar" => $jsondata["stu_prf_guardian_aadhar"],
+				"stu_prev_degree_code" => $jsondata["stu_prev_degree_code"],
+				"stu_prev_medium_ins_fk" => $jsondata["stu_prev_medium_ins_fk"],
+				"stu_adm_prev_class" => $jsondata["stu_adm_prev_class"],
 				"edit_date" => date('Y-m-d H:i:s'),
 				"edit_by" => 0
 		);
+		
 		
 		//echo '<pre>data->';print_r($data);die;
         

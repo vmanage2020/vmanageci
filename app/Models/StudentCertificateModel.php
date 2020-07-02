@@ -12,6 +12,13 @@ class StudentCertificateModel extends Model
         return $this->where($data)
                 ->first();
     }
+
+    public function viewsRowByStudent($id)
+    {
+        $where = array('stu_prf_code_fk' => $id);
+
+        return $this->where($where)->find();
+    }
     
     public function saveStudent($data)
 	{
