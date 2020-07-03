@@ -105,6 +105,12 @@ class Student extends Controller {
 			$stu_prf_co_curr = "";
 		}
 		
+		if($jsondata["stu_prf_third_lang"]){
+			$stu_prf_third_lang = implode(",",$jsondata["stu_prf_third_lang"]);
+		} else {
+			$stu_prf_third_lang = "";
+		}
+		
 		$jsondata["stu_prf_app_date"] = date("Y-m-d");
 		
 		$data = array(
@@ -185,7 +191,7 @@ class Student extends Controller {
 				"stu_group_id_fk" => $jsondata["stu_group_id_fk"],
 				"stu_adm_std" => $jsondata["stu_adm_std"],
 				"stu_prf_sec_lang" => $jsondata["stu_prf_sec_lang"],
-				"stu_prf_third_lang" => $jsondata["stu_prf_third_lang"],
+				"stu_prf_third_lang" => $stu_prf_third_lang,
 				"stu_adm_fee_coll" => $jsondata["stu_adm_fee_coll"],
 				"stu_adm_refno" => $jsondata["stu_adm_refno"],
 				"stu_prf_medical" => $jsondata["stu_prf_medical"],
@@ -339,6 +345,12 @@ class Student extends Controller {
 			$stu_prf_co_curr = "";
 		}
 		
+		if($jsondata["stu_prf_third_lang"]){
+			$stu_prf_third_lang = implode(",",$jsondata["stu_prf_third_lang"]);
+		} else {
+			$stu_prf_third_lang = "";
+		}
+		
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
 				"stu_prf_stud_name" => $jsondata["stu_prf_stud_name"],
@@ -414,7 +426,7 @@ class Student extends Controller {
 				"stu_group_id_fk" => $jsondata["stu_group_id_fk"],
 				"stu_adm_std" => $jsondata["stu_adm_std"],
 				"stu_prf_sec_lang" => $jsondata["stu_prf_sec_lang"],
-				"stu_prf_third_lang" => $jsondata["stu_prf_third_lang"],
+				"stu_prf_third_lang" => $stu_prf_third_lang,
 				"stu_adm_fee_coll" => $jsondata["stu_adm_fee_coll"],
 				"stu_adm_refno" => $jsondata["stu_adm_refno"],
 				"stu_prf_medical" => $jsondata["stu_prf_medical"],
@@ -546,6 +558,28 @@ class Student extends Controller {
 		}else{
 			$data['return']['message'] = "Error on delete";
 		}
+
+		header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+	
+	public function upload()
+    {
+		
+		$avatar = $this->request->getFile('file');
+        $avatarName = $avatar->getRandomName();
+		$avatar->move(WRITEPATH . 'uploads',$avatarName);
+ 
+          $fileinfo = [ 
+            'name' =>  $avatar->getClientName(),
+            'type'  => $avatar->getClientMimeType()
+          ];
+		  
+		$data['filename']=$avatarName;
 
 		header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");

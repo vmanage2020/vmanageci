@@ -60,6 +60,8 @@ $routes->post('/api/studentdocument', 'Student::document');
 $routes->post('/api/student/update/(:any)', 'Student::update/$1');
 $routes->post('/api/student/delete/(:any)', 'Student::delete/$1');
 
+$routes->post('/api/student/upload', 'Student::upload');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
