@@ -25,47 +25,25 @@ class Student extends Controller {
     
 	public function document()
 	{
-		/* $validated = $this->validate([
-            'certificateAttach' => [
-                'uploaded[certificateAttach]',
-                'mime_in[certificateAttach,image/jpg,image/jpeg,image/gif,image/png]',
-                'max_size[certificateAttach,4096]',
-            ],
-        ]); */
-			
+
+		$avatar = $this->request->getFile('certificate');
+        $avatarName = $avatar->getRandomName();
+		$avatar->move(WRITEPATH . 'uploads',$avatarName);
+ 
+          $fileinfo = [ 
+            'name' =>  $avatar->getClientName(),
+            'type'  => $avatar->getClientMimeType()
+          ];
+		  
+		$data['filename']=$avatarName;
+
+		header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+		echo json_encode($data, JSON_NUMERIC_CHECK);
 		
-		//if ($validated) {
-			//$path = $this->request->getFile('certificateAttach')->store();
-			/* $validated = $this->validate([
-				'file' => [
-					'uploaded[file]',
-					'mime_in[file,image/jpg,image/jpeg,image/gif,image/png]',
-					'max_size[file,4096]',
-				],
-			]);
-				
-			
-				echo $validated;die; */
-			//if ($validated) {
-				
-				$avatar = $this->request->getFile('file');
-				$avatar->move(WRITEPATH . 'uploads');
-	 
-			  $data = [
-	 
-				'name' =>  $avatar->getClientName(),
-				'type'  => $avatar->getClientMimeType()
-			  ];
-			 
-			 
-			  //}
-
-			/* if ($certificateAttach->isValid() && ! $certificateAttach->hasMoved())
-			{
-				$certificateAttach->move($path);
-			} */
-
-		//}
+		
 	}
 
     public function view($id=null)

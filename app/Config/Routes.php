@@ -54,7 +54,7 @@ $routes->post('/api/student', 'Student::create');
 $routes->get('/api/student/(:any)', 'Student::view/$1');
 $routes->put('/api/student/(:any)', 'Student::update/$1');
 $routes->delete('/api/student/(:any)', 'Student::delete/$1');
-$routes->post('/api/studentdocument', 'Student::document');
+$routes->post('/api/student/document', 'Student::document');
 
 
 $routes->post('/api/student/update/(:any)', 'Student::update/$1');
