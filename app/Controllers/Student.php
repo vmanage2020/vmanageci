@@ -23,7 +23,51 @@ class Student extends Controller {
 
     }
     
-  
+	public function document()
+	{
+		/* $validated = $this->validate([
+            'certificateAttach' => [
+                'uploaded[certificateAttach]',
+                'mime_in[certificateAttach,image/jpg,image/jpeg,image/gif,image/png]',
+                'max_size[certificateAttach,4096]',
+            ],
+        ]); */
+			
+		
+		//if ($validated) {
+			//$path = $this->request->getFile('certificateAttach')->store();
+			/* $validated = $this->validate([
+				'file' => [
+					'uploaded[file]',
+					'mime_in[file,image/jpg,image/jpeg,image/gif,image/png]',
+					'max_size[file,4096]',
+				],
+			]);
+				
+			
+				echo $validated;die; */
+			//if ($validated) {
+				
+				$avatar = $this->request->getFile('file');
+				$avatar->move(WRITEPATH . 'uploads');
+	 
+			  $data = [
+	 
+				'name' =>  $avatar->getClientName(),
+				'type'  => $avatar->getClientMimeType()
+			  ];
+			 
+			 
+			  //}
+
+			/* if ($certificateAttach->isValid() && ! $certificateAttach->hasMoved())
+			{
+				$certificateAttach->move($path);
+			} */
+
+		//}
+	}
+
     public function view($id=null)
     {
         $data['function'] = "api_view_student";
