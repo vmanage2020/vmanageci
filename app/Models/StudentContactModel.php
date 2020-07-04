@@ -15,7 +15,7 @@ class StudentContactModel extends Model
     
     public function updateStudent( $data, $id)
     {
-        $query = $this->db->table($this->table)->update($data, array('stu_prf_id_pk' => $id));
+        $query = $this->db->table($this->table)->update($data, array('stu_prf_code_fk' => $id));
         return $query;
     }
 	public function saveStudent($data)
@@ -36,6 +36,6 @@ class StudentContactModel extends Model
 
     public function delRow($id)
     {
-       return $this->db->table($this->table)->where('stu_prf_id_pk', $id)->delete(); 
+       return $this->db->table($this->table)->where('stu_prf_code_fk', $id)->delete(); 
     }
 }

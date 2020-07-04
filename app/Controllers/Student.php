@@ -245,7 +245,7 @@ class Student extends Controller {
 					{
 						
 						$studentCertificate[] = array(
-							"col_code_fk" => $doc["col_code_fk"],
+							"col_code_fk" => trim($jsondata["col_code_fk"]),
 							"stu_prf_code_fk" => $insertedID,
 							"cert_code_fk" => $doc["cert_code_fk"],
 							"crt_cert_date" => $doc["crt_cert_date"],
@@ -454,6 +454,10 @@ class Student extends Controller {
 			);
 
 			$updatedContactData =  $contactModel->updateStudent($contactData, $id);
+			
+			//echo '<pre>$contactData->';print_r($contactData);
+			//echo '<pre>$updatedContactData->';print_r($updatedContactData);die;
+			
 			if( $updatedContactData )
 			{
 
@@ -465,8 +469,8 @@ class Student extends Controller {
 					{
 						
 						$studentCertificate[] = array(
-							"col_code_fk" => $doc["col_code_fk"],
-							"stu_prf_code_fk" => $insertedID,
+							"col_code_fk" => trim($jsondata["col_code_fk"]),
+							"stu_prf_code_fk" => $id,
 							"cert_code_fk" => $doc["cert_code_fk"],
 							"crt_cert_date" => $doc["crt_cert_date"],
 							"crt_cert_no" => $doc["crt_cert_no"],
@@ -483,9 +487,12 @@ class Student extends Controller {
 					}
 
 					$studentCert = $studentCertificateModel->saveStudent($studentCertificate);
+					
+					//echo '<pre>$studentCert->';print_r($studentCertificate);
 					//echo '<pre>$studentCert->';print_r($studentCert);die;
 				}
 
+				//$data['return']['student_documents'] = sizeof($student_documents);
 				//$data['return']['insertid'] = $id;
 				$data['return']['message'] = "Updated Success";
 			}
