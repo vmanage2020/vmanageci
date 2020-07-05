@@ -181,6 +181,11 @@ class Student extends Controller {
 				"stu_prev_degree_code" => $jsondata["stu_prev_degree_code"],
 				"stu_prev_medium_ins_fk" => $jsondata["stu_prev_medium_ins_fk"],
 				"stu_adm_prev_class" => $jsondata["stu_adm_prev_class"],
+				"stu_foreign_country_name" => $jsondata["stu_foreign_country_name"],
+				"stu_foreign_passport_no" => $jsondata["stu_foreign_passport_no"],
+				"stu_foreign_passport_valid_date" => $jsondata["stu_foreign_passport_valid_date"],
+				"stu_foreign_visa_no" => $jsondata["stu_foreign_visa_no"],
+				"stu_foreign_visa_valid_date" => $jsondata["stu_foreign_visa_valid_date"],
 				"status" => 0,
 				"create_date" => date('Y-m-d H:i:s'),
 				"create_by" => 1,
@@ -416,6 +421,11 @@ class Student extends Controller {
 				"stu_prev_degree_code" => $jsondata["stu_prev_degree_code"],
 				"stu_prev_medium_ins_fk" => $jsondata["stu_prev_medium_ins_fk"],
 				"stu_adm_prev_class" => $jsondata["stu_adm_prev_class"],
+				"stu_foreign_country_name" => $jsondata["stu_foreign_country_name"],
+				"stu_foreign_passport_no" => $jsondata["stu_foreign_passport_no"],
+				"stu_foreign_passport_valid_date" => $jsondata["stu_foreign_passport_valid_date"],
+				"stu_foreign_visa_no" => $jsondata["stu_foreign_visa_no"],
+				"stu_foreign_visa_valid_date" => $jsondata["stu_foreign_visa_valid_date"],
 				"edit_date" => date('Y-m-d H:i:s'),
 				"edit_by" => 0
 		);
