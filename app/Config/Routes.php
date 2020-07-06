@@ -42,11 +42,25 @@ $routes->post('/signin', 'Login::signin');
 $routes->post('/api/signin', 'Login::api_signin');
 
 //Master
+$routes->get('/api/master', 'Master::index'); // getAll
+
 $routes->get('/api/academicboard', 'Master::academicboard'); // getAll
 $routes->get('/api/academicboard/(:any)', 'Master::academicboard/$1'); // get by id
 $routes->post('/api/academicboard/add', 'Master::academicboard/add'); // Add data
 $routes->put('/api/academicboard/update/(:any)', 'Master::academicboard/update/$1'); // update data
 $routes->delete('/api/academicboard/delete/(:any)', 'Master::academicboard/delete/$1'); // delete data
+
+$routes->get('/api/language', 'Master::language'); // getAll
+$routes->get('/api/language/(:any)', 'Master::language/$1'); // get by id
+$routes->post('/api/language/add', 'Master::language/add'); // Add data
+$routes->put('/api/language/update/(:any)', 'Master::language/update/$1'); // update data
+$routes->delete('/api/language/delete/(:any)', 'Master::language/delete/$1'); // delete data
+
+$routes->get('/api/activity', 'Master::activity'); // getAll
+$routes->get('/api/activity/(:any)', 'Master::activity/$1'); // get by id
+$routes->post('/api/activity/add', 'Master::activity/add'); // Add data
+$routes->put('/api/activity/update/(:any)', 'Master::activity/update/$1'); // update data
+$routes->delete('/api/activity/delete/(:any)', 'Master::activity/delete/$1'); // delete data
 
 //STUDENT API CALLs
 $routes->get('/api/students', 'Student::index');
