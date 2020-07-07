@@ -25,8 +25,12 @@ class MasterModel extends Model
 
     public function getBoard($data)
     {
+		$query = $this->db->query('select * from '.$this->table_board.' where board_cor_id_pk='.$data.' order by Id asc');
+        return $query->getResult();
+		/*
         return  $this->db->table($this->table_board)->where($data)
         ->first();
+		*/
     }
 
     public function getBoards($status = false)
@@ -39,7 +43,10 @@ class MasterModel extends Model
 
     public function delBoard($id)
     {
-       return $this->db->table($this->table_board)->where($data)->delete(); 
+		$query = $this->db->query('delete from '.$this->table_board.' where board_cor_id_pk='.$id.'');
+        return $query->getResult();
+		
+       //return $this->db->table($this->table_board)->where($data)->delete(); 
     }
 
 
@@ -58,8 +65,12 @@ class MasterModel extends Model
 
     public function getActivity($data)
     {
+		$query = $this->db->query('select * from '.$this->table_extra.' where Id='.$data.' order by Id asc');
+        return $query->getResult();
+		/*
         return  $this->db->table($this->table_extra)->where($data)
         ->first();
+		*/
     }
 
     public function getActivities($status = false)
@@ -72,7 +83,10 @@ class MasterModel extends Model
 
     public function delActivity($id)
     {
-       return $this->db->table($this->table_extra)->where($data)->delete(); 
+		$query = $this->db->query('delete from '.$this->table_extra.' where Id='.$id.'');
+        return $query->getResult();
+		
+       //return $this->db->table($this->table_extra)->where($data)->delete(); 
     }
 
     /* LANGUAGE */
@@ -90,8 +104,16 @@ class MasterModel extends Model
 
     public function getLanguage($data)
     {
-        return  $this->db->table($this->table_lang)->where($data)
+		$query = $this->db->query('select * from '.$this->table_lang.' where Id='.$data.' order by Id asc');
+        return $query->getResult();
+		
+		/*
+		return  $this->db->table($this->table_extra)->where($data)
         ->first();
+		*/
+		
+        //return  $this->db->table($this->table_lang)->getWhere($data);
+	
     }
 
     public function getLanguages($status = false)
@@ -104,7 +126,10 @@ class MasterModel extends Model
 
     public function delLanguage($id)
     {
-       return $this->db->table($this->table_lang)->where($data)->delete(); 
+		$query = $this->db->query('delete from '.$this->table_lang.' where Id='.$id.'');
+        return $query->getResult();
+		
+       //return $this->db->table($this->table_lang)->where($data)->delete(); 
     }
  
 

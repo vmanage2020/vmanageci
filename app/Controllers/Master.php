@@ -130,8 +130,9 @@ class Master extends Controller {
 			$where = array(
 				'board_cor_id_pk' => trim($id)
 			);
-			$delData = $model->delBoard($where);
+			$delData = $model->delBoard($id);
 			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
 			if( $affectedRows )
 			{
 				$data['return']['message'] = "Deleted Success";
@@ -146,12 +147,13 @@ class Master extends Controller {
 			$data['academic_boards'] = $model->getBoards();
 			
 		}
-		elseif( $id != null && !$type )
+		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($id)
+				'board_cor_id_pk' => trim($type)
 			);
-			$data['academic_boards'] = $model->getBoard($where);
+			
+			$data['academic_boards'] = $model->getBoard($type);
 			
 		}
         /* $where = array(
@@ -219,8 +221,10 @@ class Master extends Controller {
 			$where = array(
 				'Id' => trim($id)
 			);
-			$delData = $model->delLanguage($where);
+			$delData = $model->delLanguage($id);
+			
 			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
 			if( $affectedRows )
 			{
 				$data['return']['message'] = "Deleted Success";
@@ -235,12 +239,14 @@ class Master extends Controller {
 			$data['languages'] = $model->getLanguages();
 			
 		}
-		elseif( $id != null && !$type )
+		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'Id' => trim($id)
+				'Id' => trim($type)
 			);
-			$data['languages'] = $model->getLanguage($where);
+					
+					
+			$data['languages'] = $model->getLanguage($type);
 			
 		}
         /* $where = array(
@@ -310,8 +316,9 @@ class Master extends Controller {
 			$where = array(
 				'Id' => trim($id)
 			);
-			$delData = $model->delActivity($where);
+			$delData = $model->delActivity($id);
 			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
 			if( $affectedRows )
 			{
 				$data['return']['message'] = "Deleted Success";
@@ -326,12 +333,12 @@ class Master extends Controller {
 			$data['activities'] = $model->getActivities();
 			
 		}
-		elseif( $id != null && !$type )
+		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'Id' => trim($id)
+				'Id' => trim($type)
 			);
-			$data['activities'] = $model->getActivity($where);
+			$data['activities'] = $model->getActivity($type);
 			
 		}
         /* $where = array(

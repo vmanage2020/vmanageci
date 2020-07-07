@@ -49,33 +49,37 @@ $routes->get('/api/dashboard', 'Master::dashboard'); // getAll
 $routes->get('/api/academicboard', 'Master::academicboard'); // getAll
 $routes->get('/api/academicboard/(:any)', 'Master::academicboard/$1'); // get by id
 $routes->post('/api/academicboard/add', 'Master::academicboard/add'); // Add data
+$routes->post('/api/academicboard/update/(:any)', 'Master::academicboard/update/$1'); // update data
+$routes->post('/api/academicboard/delete/(:any)', 'Master::academicboard/delete/$1'); // delete data
 $routes->put('/api/academicboard/update/(:any)', 'Master::academicboard/update/$1'); // update data
 $routes->delete('/api/academicboard/delete/(:any)', 'Master::academicboard/delete/$1'); // delete data
 
 $routes->get('/api/language', 'Master::language'); // getAll
 $routes->get('/api/language/(:any)', 'Master::language/$1'); // get by id
 $routes->post('/api/language/add', 'Master::language/add'); // Add data
+$routes->post('/api/language/update/(:any)', 'Master::language/update/$1'); // update data
+$routes->post('/api/language/delete/(:any)', 'Master::language/delete/$1'); // delete data
 $routes->put('/api/language/update/(:any)', 'Master::language/update/$1'); // update data
 $routes->delete('/api/language/delete/(:any)', 'Master::language/delete/$1'); // delete data
 
 $routes->get('/api/activity', 'Master::activity'); // getAll
 $routes->get('/api/activity/(:any)', 'Master::activity/$1'); // get by id
 $routes->post('/api/activity/add', 'Master::activity/add'); // Add data
+$routes->post('/api/activity/update/(:any)', 'Master::activity/update/$1'); // update data
+$routes->post('/api/activity/delete/(:any)', 'Master::activity/delete/$1'); // delete data
 $routes->put('/api/activity/update/(:any)', 'Master::activity/update/$1'); // update data
 $routes->delete('/api/activity/delete/(:any)', 'Master::activity/delete/$1'); // delete data
 
 //STUDENT API CALLs
 $routes->get('/api/students', 'Student::index');
-$routes->post('/api/student', 'Student::create');
 $routes->get('/api/student/(:any)', 'Student::view/$1');
-$routes->put('/api/student/(:any)', 'Student::update/$1');
-$routes->delete('/api/student/(:any)', 'Student::delete/$1');
-$routes->post('/api/student/document', 'Student::document');
-
-
+$routes->post('/api/student', 'Student::create');
 $routes->post('/api/student/update/(:any)', 'Student::update/$1');
 $routes->post('/api/student/delete/(:any)', 'Student::delete/$1');
+$routes->put('/api/student/(:any)', 'Student::update/$1');
+$routes->delete('/api/student/(:any)', 'Student::delete/$1');
 
+$routes->post('/api/student/document', 'Student::document');
 $routes->post('/api/student/upload', 'Student::upload');
 
 /**
