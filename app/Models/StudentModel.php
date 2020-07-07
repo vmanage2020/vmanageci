@@ -47,4 +47,13 @@ class StudentModel extends Model
     {
        return $this->db->table($this->table)->where('stu_prf_id_pk', $id)->delete(); 
     }
+
+    public function countRow()
+    {
+
+      $sql = 'select count(*) as studentcount from '.$this->table;
+      $query =  $this->db->query($sql);      
+      return $query->getRow();
+
+    }
 }

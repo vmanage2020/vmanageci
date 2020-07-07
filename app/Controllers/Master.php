@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\MasterModel;
+use App\Models\StudentModel;
 //use App\Models\StudentContactModel;
 //use App\Models\StudentCertificateModel;
 use CodeIgniter\Controller;
@@ -47,7 +48,26 @@ class Master extends Controller {
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         echo json_encode($data, JSON_NUMERIC_CHECK);
 
-    }
+	}
+	
+	public function dashboard()
+    {
+        $data['function'] = "api_dashboard_data";
+		$studentmodel = new StudentModel();
+		$student_array = array();
+		$studentinfo = $studentmodel->countRow();
+		
+		$data['student']=$studentinfo->studentcount;
+		$data['teacher']=0;
+		$data['parent']=0;
+		$data['staff']=0;
+
+		header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
     
   
     public function academicboard($type=null,$id=null)

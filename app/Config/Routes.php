@@ -44,6 +44,8 @@ $routes->post('/api/signin', 'Login::api_signin');
 //Master
 $routes->get('/api/master', 'Master::index'); // getAll
 
+$routes->get('/api/dashboard', 'Master::dashboard'); // getAll
+
 $routes->get('/api/academicboard', 'Master::academicboard'); // getAll
 $routes->get('/api/academicboard/(:any)', 'Master::academicboard/$1'); // get by id
 $routes->post('/api/academicboard/add', 'Master::academicboard/add'); // Add data
