@@ -172,9 +172,9 @@ class Master extends Controller {
 	
 
 	
-	public function CertificateName($type=null,$id=null)
+	public function certificatename($type=null,$id=null)
     {
-        $data['function'] = "api_academic_board";
+        $data['function'] = "ac_ms_cert_master";
         $model = new MasterModel();
 
 		$jsondata = json_decode(file_get_contents('php://input'), true);
@@ -183,9 +183,9 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
-				"board_cor_edu_level" => 0,
-				"board_cor_others" => 0,
+				"crt_ms_name" => $jsondata["crt_ms_name"],
+				"col_code_fk" => 0,
+				"crt_ms_isreturnable" => 1,
 				"status" => 0,
 				"create_by" => 1,
 				"create_date" => date('Y-m-d H:i:s'),
@@ -200,6 +200,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getCertificateName($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -211,7 +212,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
+				"crt_ms_name" => $jsondata["crt_ms_name"],
 				"edit_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s')
 			);
@@ -220,6 +221,7 @@ class Master extends Controller {
 
 			if( $updatedData )
 			{
+				$data['return']['data'] = $model->getCertificateName($id);
 				$data['return']['message'] = "Updated Success";
 			}else
 			{
@@ -230,7 +232,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($id)
+				'crt_ms_id_pk' => trim($id)
 			);
 			$delData = $model->delCertificateName($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -246,16 +248,16 @@ class Master extends Controller {
 		elseif( !$id && !$type )
 		{
 			
-			$data['academic_boards'] = $model->getCertificateNames();
+			$data['certificatenames'] = $model->getCertificateNames();
 			
 		}
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($type)
+				'crt_ms_id_pk' => trim($type)
 			);
 			
-			$data['academic_boards'] = $model->getCertificateName($type);
+			$data['certificatenames'] = $model->getCertificateName($type);
 			
 		}
         /* $where = array(
@@ -275,9 +277,9 @@ class Master extends Controller {
 
 
 
-	public function Citizen($type=null,$id=null)
+	public function citizen($type=null,$id=null)
     {
-        $data['function'] = "api_academic_board";
+        $data['function'] = "tbl_citizen";
         $model = new MasterModel();
 
 		$jsondata = json_decode(file_get_contents('php://input'), true);
@@ -286,9 +288,8 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
-				"board_cor_edu_level" => 0,
-				"board_cor_others" => 0,
+				"citizen" => $jsondata["citizen"],
+				"col_code_fk" => 1,
 				"status" => 0,
 				"create_by" => 1,
 				"create_date" => date('Y-m-d H:i:s'),
@@ -303,6 +304,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getCitizen($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -314,7 +316,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
+				"citizen" => $jsondata["citizen"],
 				"edit_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s')
 			);
@@ -323,6 +325,7 @@ class Master extends Controller {
 
 			if( $updatedData )
 			{
+				$data['return']['data'] = $model->getCitizen($id);
 				$data['return']['message'] = "Updated Success";
 			}else
 			{
@@ -333,7 +336,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($id)
+				'citizen_id_pk' => trim($id)
 			);
 			$delData = $model->delCitizen($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -349,16 +352,16 @@ class Master extends Controller {
 		elseif( !$id && !$type )
 		{
 			
-			$data['academic_boards'] = $model->getCitizens();
+			$data['citizens'] = $model->getCitizens();
 			
 		}
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($type)
+				'citizen_id_pk' => trim($type)
 			);
 			
-			$data['academic_boards'] = $model->getCitizen($type);
+			$data['citizens'] = $model->getCitizen($type);
 			
 		}
         /* $where = array(
@@ -379,9 +382,9 @@ class Master extends Controller {
 	
 	
 	
-	public function Community($type=null,$id=null)
+	public function community($type=null,$id=null)
     {
-        $data['function'] = "api_academic_board";
+        $data['function'] = "gn_ms_community";
         $model = new MasterModel();
 
 		$jsondata = json_decode(file_get_contents('php://input'), true);
@@ -390,9 +393,8 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
-				"board_cor_edu_level" => 0,
-				"board_cor_others" => 0,
+				"com_des" => $jsondata["com_des"],
+				"col_code_fk" => 1,
 				"status" => 0,
 				"create_by" => 1,
 				"create_date" => date('Y-m-d H:i:s'),
@@ -407,6 +409,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getCommunity($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -418,7 +421,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
+				"com_des" => $jsondata["com_des"],
 				"edit_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s')
 			);
@@ -427,6 +430,7 @@ class Master extends Controller {
 
 			if( $updatedData )
 			{
+				$data['return']['data'] = $model->getCommunity($id);
 				$data['return']['message'] = "Updated Success";
 			}else
 			{
@@ -437,7 +441,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($id)
+				'crt_ms_id_pk' => trim($id)
 			);
 			$delData = $model->delCommunity($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -453,16 +457,16 @@ class Master extends Controller {
 		elseif( !$id && !$type )
 		{
 			
-			$data['academic_boards'] = $model->getCommunitys();
+			$data['communities'] = $model->getCommunitys();
 			
 		}
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($type)
+				'crt_ms_id_pk' => trim($type)
 			);
 			
-			$data['academic_boards'] = $model->getCommunity($type);
+			$data['communities'] = $model->getCommunity($type);
 			
 		}
         /* $where = array(
@@ -482,9 +486,9 @@ class Master extends Controller {
 	
 	
 	
-	public function Religion($type=null,$id=null)
+	public function religion($type=null,$id=null)
     {
-        $data['function'] = "api_academic_board";
+        $data['function'] = "gn_ms_religio";
         $model = new MasterModel();
 
 		$jsondata = json_decode(file_get_contents('php://input'), true);
@@ -493,9 +497,8 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
-				"board_cor_edu_level" => 0,
-				"board_cor_others" => 0,
+				"rel_des" => $jsondata["rel_des"],
+				"col_code_fk" => 1,
 				"status" => 0,
 				"create_by" => 1,
 				"create_date" => date('Y-m-d H:i:s'),
@@ -510,6 +513,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getReligion($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -521,7 +525,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
+				"rel_des" => $jsondata["rel_des"],
 				"edit_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s')
 			);
@@ -530,6 +534,7 @@ class Master extends Controller {
 
 			if( $updatedData )
 			{
+				$data['return']['data'] = $model->getCertificateName($id);
 				$data['return']['message'] = "Updated Success";
 			}else
 			{
@@ -540,7 +545,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($id)
+				'rel_id_pk' => trim($id)
 			);
 			$delData = $model->delReligion($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -556,16 +561,16 @@ class Master extends Controller {
 		elseif( !$id && !$type )
 		{
 			
-			$data['academic_boards'] = $model->getReligions();
+			$data['religions'] = $model->getReligions();
 			
 		}
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($type)
+				'rel_id_pk' => trim($type)
 			);
 			
-			$data['academic_boards'] = $model->getReligion($type);
+			$data['religions'] = $model->getReligion($type);
 			
 		}
         /* $where = array(
@@ -585,9 +590,9 @@ class Master extends Controller {
 
 
 	
-	public function BloodGroup($type=null,$id=null)
+	public function bloodgroup($type=null,$id=null)
     {
-        $data['function'] = "api_academic_board";
+        $data['function'] = "gn_ms_blood_grp";
         $model = new MasterModel();
 
 		$jsondata = json_decode(file_get_contents('php://input'), true);
@@ -596,9 +601,8 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
-				"board_cor_edu_level" => 0,
-				"board_cor_others" => 0,
+				"bld_des" => $jsondata["bld_des"],
+				"col_code_fk" => 1,
 				"status" => 0,
 				"create_by" => 1,
 				"create_date" => date('Y-m-d H:i:s'),
@@ -613,6 +617,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getBloodGroup($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -624,7 +629,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
+				"bld_des" => $jsondata["bld_des"],
 				"edit_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s')
 			);
@@ -643,7 +648,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($id)
+				'bld_id_pk' => trim($id)
 			);
 			$delData = $model->delBloodGroup($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -659,16 +664,16 @@ class Master extends Controller {
 		elseif( !$id && !$type )
 		{
 			
-			$data['academic_boards'] = $model->getBloodGroups();
+			$data['bloodgroups'] = $model->getBloodGroups();
 			
 		}
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($type)
+				'bld_id_pk' => trim($type)
 			);
 			
-			$data['academic_boards'] = $model->getBloodGroup($type);
+			$data['bloodgroups'] = $model->getBloodGroup($type);
 			
 		}
         /* $where = array(
@@ -689,9 +694,9 @@ class Master extends Controller {
 
 
 
-	public function Standard($type=null,$id=null)
+	public function standard($type=null,$id=null)
     {
-        $data['function'] = "api_academic_board";
+        $data['function'] = "tbl_standard";
         $model = new MasterModel();
 
 		$jsondata = json_decode(file_get_contents('php://input'), true);
@@ -700,9 +705,8 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
-				"board_cor_edu_level" => 0,
-				"board_cor_others" => 0,
+				"standard" => $jsondata["standard"],
+				"col_code_fk" => 1,
 				"status" => 0,
 				"create_by" => 1,
 				"create_date" => date('Y-m-d H:i:s'),
@@ -717,6 +721,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getStandard($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -728,7 +733,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
+				"standard" => $jsondata["standard"],
 				"edit_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s')
 			);
@@ -737,6 +742,7 @@ class Master extends Controller {
 
 			if( $updatedData )
 			{
+				$data['return']['data'] = $model->getStandard($id);
 				$data['return']['message'] = "Updated Success";
 			}else
 			{
@@ -747,7 +753,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($id)
+				'standard_id_pk' => trim($id)
 			);
 			$delData = $model->delStandard($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -763,16 +769,16 @@ class Master extends Controller {
 		elseif( !$id && !$type )
 		{
 			
-			$data['academic_boards'] = $model->getStandards();
+			$data['standards'] = $model->getStandards();
 			
 		}
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($type)
+				'standard_id_pk' => trim($type)
 			);
 			
-			$data['academic_boards'] = $model->getStandard($type);
+			$data['standards'] = $model->getStandard($type);
 			
 		}
         /* $where = array(
@@ -793,9 +799,9 @@ class Master extends Controller {
 
 
 
-	public function GroupName($type=null,$id=null)
+	public function groupname($type=null,$id=null)
     {
-        $data['function'] = "api_academic_board";
+        $data['function'] = "ac_ms_board_group_info";
         $model = new MasterModel();
 
 		$jsondata = json_decode(file_get_contents('php://input'), true);
@@ -804,9 +810,9 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
-				"board_cor_edu_level" => 0,
-				"board_cor_others" => 0,
+				"brd_grp_name" => $jsondata["brd_grp_name"],
+				"brd_grp_medium_id" => 0,
+				"brd_grp_board_id" => 1,
 				"status" => 0,
 				"create_by" => 1,
 				"create_date" => date('Y-m-d H:i:s'),
@@ -821,6 +827,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getGroupname($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -832,7 +839,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
+				"brd_grp_name" => $jsondata["brd_grp_name"],
 				"edit_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s')
 			);
@@ -842,6 +849,7 @@ class Master extends Controller {
 			if( $updatedData )
 			{
 				$data['return']['message'] = "Updated Success";
+				$data['return']['data'] = $model->getGroupname($id);
 			}else
 			{
 				$data['return']['message'] = "Error on Insert";
@@ -851,7 +859,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($id)
+				'brd_grp_id_pk' => trim($id)
 			);
 			$delData = $model->delGroupname($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -867,16 +875,16 @@ class Master extends Controller {
 		elseif( !$id && !$type )
 		{
 			
-			$data['academic_boards'] = $model->getGroupnames();
+			$data['groupnames'] = $model->getGroupnames();
 			
 		}
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($type)
+				'brd_grp_id_pk' => trim($type)
 			);
 			
-			$data['academic_boards'] = $model->getGroupname($type);
+			$data['groupnames'] = $model->getGroupname($type);
 			
 		}
         /* $where = array(
@@ -898,7 +906,7 @@ class Master extends Controller {
 
 	public function academicyear($type=null,$id=null)
     {
-        $data['function'] = "api_academic_board";
+        $data['function'] = "ac_ms_academic_year_detail";
         $model = new MasterModel();
 
 		$jsondata = json_decode(file_get_contents('php://input'), true);
@@ -907,9 +915,9 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
-				"board_cor_edu_level" => 0,
-				"board_cor_others" => 0,
+				"ayd_start_year" => $jsondata["ayd_start_year"],
+				"ayd_end_year" => 0,
+				"col_code_fk" => 0,
 				"status" => 0,
 				"create_by" => 1,
 				"create_date" => date('Y-m-d H:i:s'),
@@ -924,6 +932,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getYear($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -935,7 +944,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"board_cor_name" => $jsondata["board_cor_name"],
+				"ayd_start_year" => $jsondata["ayd_start_year"],
 				"edit_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s')
 			);
@@ -944,6 +953,8 @@ class Master extends Controller {
 
 			if( $updatedData )
 			{
+				
+				$data['return']['data'] = $model->getYear($id);			
 				$data['return']['message'] = "Updated Success";
 			}else
 			{
@@ -954,7 +965,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($id)
+				'ayd_id_pk' => trim($id)
 			);
 			$delData = $model->delYear($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -970,16 +981,16 @@ class Master extends Controller {
 		elseif( !$id && !$type )
 		{
 			
-			$data['academic_boards'] = $model->getYears();
+			$data['academicyears'] = $model->getYears();
 			
 		}
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'board_cor_id_pk' => trim($type)
+				'ayd_id_pk' => trim($type)
 			);
 			
-			$data['academic_boards'] = $model->getYear($type);
+			$data['academicyears'] = $model->getYear($type);
 			
 		}
         /* $where = array(
@@ -1114,6 +1125,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getActivity($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -1132,6 +1144,7 @@ class Master extends Controller {
 
 			if( $updatedData )
 			{
+				$data['return']['data'] = $model->getActivity($id);
 				$data['return']['message'] = "Updated Success";
 			}else
 			{

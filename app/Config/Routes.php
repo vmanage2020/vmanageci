@@ -70,6 +70,70 @@ $routes->post('/api/activity/delete/(:any)', 'Master::activity/delete/$1'); // d
 $routes->put('/api/activity/update/(:any)', 'Master::activity/update/$1'); // update data
 $routes->delete('/api/activity/delete/(:any)', 'Master::activity/delete/$1'); // delete data
 
+$routes->get('/api/academicyear', 'Master::academicyear'); // getAll
+$routes->get('/api/academicyear/(:any)', 'Master::academicyear/$1'); // get by id
+$routes->post('/api/academicyear/add', 'Master::academicyear/add'); // Add data
+$routes->post('/api/academicyear/update/(:any)', 'Master::academicyear/update/$1'); // update data
+$routes->post('/api/academicyear/delete/(:any)', 'Master::academicyear/delete/$1'); // delete data
+$routes->put('/api/academicyear/update/(:any)', 'Master::academicyear/update/$1'); // update data
+$routes->delete('/api/academicyear/delete/(:any)', 'Master::academicyear/delete/$1'); // delete data
+
+$routes->get('/api/groupname', 'Master::groupname'); // getAll
+$routes->get('/api/groupname/(:any)', 'Master::groupname/$1'); // get by id
+$routes->post('/api/groupname/add', 'Master::groupname/add'); // Add data
+$routes->post('/api/groupname/update/(:any)', 'Master::groupname/update/$1'); // update data
+$routes->post('/api/groupname/delete/(:any)', 'Master::groupname/delete/$1'); // delete data
+$routes->put('/api/groupname/update/(:any)', 'Master::groupname/update/$1'); // update data
+$routes->delete('/api/groupname/delete/(:any)', 'Master::groupname/delete/$1'); // delete data
+
+$routes->get('/api/standard', 'Master::standard'); // getAll
+$routes->get('/api/standard/(:any)', 'Master::standard/$1'); // get by id
+$routes->post('/api/standard/add', 'Master::standard/add'); // Add data
+$routes->post('/api/standard/update/(:any)', 'Master::standard/update/$1'); // update data
+$routes->post('/api/standard/delete/(:any)', 'Master::standard/delete/$1'); // delete data
+$routes->put('/api/standard/update/(:any)', 'Master::standard/update/$1'); // update data
+$routes->delete('/api/standard/delete/(:any)', 'Master::standard/delete/$1'); // delete data
+
+$routes->get('/api/bloodgroup', 'Master::bloodgroup'); // getAll
+$routes->get('/api/bloodgroup/(:any)', 'Master::bloodgroup/$1'); // get by id
+$routes->post('/api/bloodgroup/add', 'Master::bloodgroup/add'); // Add data
+$routes->post('/api/bloodgroup/update/(:any)', 'Master::bloodgroup/update/$1'); // update data
+$routes->post('/api/bloodgroup/delete/(:any)', 'Master::bloodgroup/delete/$1'); // delete data
+$routes->put('/api/bloodgroup/update/(:any)', 'Master::bloodgroup/update/$1'); // update data
+$routes->delete('/api/bloodgroup/delete/(:any)', 'Master::bloodgroup/delete/$1'); // delete data
+
+$routes->get('/api/religion', 'Master::religion'); // getAll
+$routes->get('/api/religion/(:any)', 'Master::religion/$1'); // get by id
+$routes->post('/api/religion/add', 'Master::religion/add'); // Add data
+$routes->post('/api/religion/update/(:any)', 'Master::religion/update/$1'); // update data
+$routes->post('/api/religion/delete/(:any)', 'Master::religion/delete/$1'); // delete data
+$routes->put('/api/religion/update/(:any)', 'Master::religion/update/$1'); // update data
+$routes->delete('/api/religion/delete/(:any)', 'Master::religion/delete/$1'); // delete data
+
+$routes->get('/api/community', 'Master::community'); // getAll
+$routes->get('/api/community/(:any)', 'Master::community/$1'); // get by id
+$routes->post('/api/community/add', 'Master::community/add'); // Add data
+$routes->post('/api/community/update/(:any)', 'Master::community/update/$1'); // update data
+$routes->post('/api/community/delete/(:any)', 'Master::community/delete/$1'); // delete data
+$routes->put('/api/community/update/(:any)', 'Master::community/update/$1'); // update data
+$routes->delete('/api/community/delete/(:any)', 'Master::community/delete/$1'); // delete data
+
+$routes->get('/api/citizen', 'Master::citizen'); // getAll
+$routes->get('/api/citizen/(:any)', 'Master::citizen/$1'); // get by id
+$routes->post('/api/citizen/add', 'Master::citizen/add'); // Add data
+$routes->post('/api/citizen/update/(:any)', 'Master::citizen/update/$1'); // update data
+$routes->post('/api/citizen/delete/(:any)', 'Master::citizen/delete/$1'); // delete data
+$routes->put('/api/citizen/update/(:any)', 'Master::citizen/update/$1'); // update data
+$routes->delete('/api/citizen/delete/(:any)', 'Master::citizen/delete/$1'); // delete data
+
+$routes->get('/api/certificatename', 'Master::certificatename'); // getAll
+$routes->get('/api/certificatename/(:any)', 'Master::certificatename/$1'); // get by id
+$routes->post('/api/certificatename/add', 'Master::certificatename/add'); // Add data
+$routes->post('/api/certificatename/update/(:any)', 'Master::certificatename/update/$1'); // update data
+$routes->post('/api/certificatename/delete/(:any)', 'Master::certificatename/delete/$1'); // delete data
+$routes->put('/api/certificatename/update/(:any)', 'Master::certificatename/update/$1'); // update data
+$routes->delete('/api/certificatename/delete/(:any)', 'Master::certificatename/delete/$1'); // delete data
+
 //STUDENT API CALLs
 $routes->get('/api/students', 'Student::index');
 $routes->get('/api/student/(:any)', 'Student::view/$1');
