@@ -170,6 +170,832 @@ class Master extends Controller {
         echo json_encode($data, JSON_NUMERIC_CHECK);
 	}
 	
+
+	
+	public function CertificateName($type=null,$id=null)
+    {
+        $data['function'] = "api_academic_board";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"board_cor_edu_level" => 0,
+				"board_cor_others" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$insertedData = $model->saveCertificateName($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateCertificateName($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($id)
+			);
+			$delData = $model->delCertificateName($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['academic_boards'] = $model->getCertificateNames();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($type)
+			);
+			
+			$data['academic_boards'] = $model->getCertificateName($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+
+
+
+
+	public function Citizen($type=null,$id=null)
+    {
+        $data['function'] = "api_academic_board";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"board_cor_edu_level" => 0,
+				"board_cor_others" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$insertedData = $model->saveCitizen($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateCitizen($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($id)
+			);
+			$delData = $model->delCitizen($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['academic_boards'] = $model->getCitizens();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($type)
+			);
+			
+			$data['academic_boards'] = $model->getCitizen($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+	
+	
+	
+	
+	public function Community($type=null,$id=null)
+    {
+        $data['function'] = "api_academic_board";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"board_cor_edu_level" => 0,
+				"board_cor_others" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$insertedData = $model->saveCommunity($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateCommunity($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($id)
+			);
+			$delData = $model->delCommunity($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['academic_boards'] = $model->getCommunitys();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($type)
+			);
+			
+			$data['academic_boards'] = $model->getCommunity($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+	
+	
+	
+	public function Religion($type=null,$id=null)
+    {
+        $data['function'] = "api_academic_board";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"board_cor_edu_level" => 0,
+				"board_cor_others" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$insertedData = $model->saveReligion($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateReligion($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($id)
+			);
+			$delData = $model->delReligion($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['academic_boards'] = $model->getReligions();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($type)
+			);
+			
+			$data['academic_boards'] = $model->getReligion($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+
+
+
+	
+	public function BloodGroup($type=null,$id=null)
+    {
+        $data['function'] = "api_academic_board";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"board_cor_edu_level" => 0,
+				"board_cor_others" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$insertedData = $model->saveBloodGroup($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateBloodGroup($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($id)
+			);
+			$delData = $model->delBloodGroup($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['academic_boards'] = $model->getBloodGroups();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($type)
+			);
+			
+			$data['academic_boards'] = $model->getBloodGroup($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+
+
+
+
+
+	public function Standard($type=null,$id=null)
+    {
+        $data['function'] = "api_academic_board";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"board_cor_edu_level" => 0,
+				"board_cor_others" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$insertedData = $model->saveStandard($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateStandard($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($id)
+			);
+			$delData = $model->delStandard($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['academic_boards'] = $model->getStandards();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($type)
+			);
+			
+			$data['academic_boards'] = $model->getStandard($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+
+
+
+
+
+	public function GroupName($type=null,$id=null)
+    {
+        $data['function'] = "api_academic_board";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"board_cor_edu_level" => 0,
+				"board_cor_others" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$insertedData = $model->saveGroupname($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateGroupname($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($id)
+			);
+			$delData = $model->delGroupname($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['academic_boards'] = $model->getGroupnames();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($type)
+			);
+			
+			$data['academic_boards'] = $model->getGroupname($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+
+
+
+
+	public function academicyear($type=null,$id=null)
+    {
+        $data['function'] = "api_academic_board";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"board_cor_edu_level" => 0,
+				"board_cor_others" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$insertedData = $model->saveYear($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"board_cor_name" => $jsondata["board_cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateYear($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($id)
+			);
+			$delData = $model->delYear($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['academic_boards'] = $model->getYears();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'board_cor_id_pk' => trim($type)
+			);
+			
+			$data['academic_boards'] = $model->getYear($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
 	public function language($type=null,$id=null)
     {
         $data['function'] = "api_language";
