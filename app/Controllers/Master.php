@@ -1017,6 +1017,7 @@ class Master extends Controller {
 			{
 				$lastInsertId = $insertedID;
 				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getLanguage($insertedID);
 				$data['return']['message'] = "Inserted Success";
 			}
 			else
@@ -1035,6 +1036,7 @@ class Master extends Controller {
 
 			if( $updatedData )
 			{
+				$data['return']['data'] = $model->getLanguage($id);
 				$data['return']['message'] = "Updated Success";
 			}else
 			{
