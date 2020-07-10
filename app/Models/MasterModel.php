@@ -10,24 +10,31 @@ class MasterModel extends Model
     protected $table_extra = 'tbl_extracurricular';
     protected $table_lang = 'tbl_languages';
     protected $table_year= 'ac_ms_academic_year_detail';
-    
+    protected $table_Groupname= 'ac_ms_board_group_info';
+    protected $table_BloodGroup= 'gn_ms_blood_grp';
+    protected $table_Religion = 'gn_ms_religion';
+    protected $table_Community = 'gn_ms_community';
+    protected $table_Certificate = 'ac_ms_cert_master';
+    protected $table_Citizen = 'tbl_citizen';
+    protected $table_Standard = 'ac_ms_com_stds';
+      
   
- /*Citizen */
+ /*Certificate */
  public function saveCertificateName($data)
  {
-     $query = $this->db->table($this->table_Standard)->insert($data);
+     $query = $this->db->table($this->table_Certificate)->insert($data);
      return $query;
  }
 
  public function updateCertificateName($data, $id)
  {
-     $query = $this->db->table($this->table_Standard)->update($data, array('board_cor_id_pk' => $id));
+     $query = $this->db->table($this->table_Certificate)->update($data, array('crt_ms_id_pk' => $id));
      return $query;
  }
 
  public function getCertificateName($data)
  {
-     $query = $this->db->query('select * from '.$this->table_Standard.' where board_cor_id_pk='.$data.' order by Id asc');
+     $query = $this->db->query('select * from '.$this->table_Certificate.' where crt_ms_id_pk='.$data.' order by crt_ms_id_pk asc');
      return $query->getResult();
      /*
      return  $this->db->table($this->table_board)->where($data)
@@ -37,7 +44,7 @@ class MasterModel extends Model
 
  public function getCertificateNames($status = false)
  {
-     $query = $this->db->query('select * from '.$this->table_Standard.' order by board_cor_id_pk asc');
+     $query = $this->db->query('select * from '.$this->table_Certificate.' order by crt_ms_id_pk asc');
      return $query->getResult();
      //$query = $this->db->table($this->table_board)->findAll();
      //return $query;
@@ -45,7 +52,7 @@ class MasterModel extends Model
 
  public function delCertificateName($id)
  {
-     $query = $this->db->query('delete from '.$this->table_Standard.' where board_cor_id_pk='.$id.'');
+     $query = $this->db->query('delete from '.$this->table_Certificate.' where crt_ms_id_pk='.$id.'');
      return $query->getResult();
      
     //return $this->db->table($this->table_board)->where($data)->delete(); 
@@ -57,19 +64,19 @@ class MasterModel extends Model
  /*Citizen */
 	public function saveCitizen($data)
 	{
-		$query = $this->db->table($this->table_Standard)->insert($data);
+		$query = $this->db->table($this->table_Citizen)->insert($data);
         return $query;
     }
 
     public function updateCitizen($data, $id)
     {
-        $query = $this->db->table($this->table_Standard)->update($data, array('board_cor_id_pk' => $id));
+        $query = $this->db->table($this->table_Citizen)->update($data, array('Id' => $id));
         return $query;
     }
 
     public function getCitizen($data)
     {
-		$query = $this->db->query('select * from '.$this->table_Standard.' where board_cor_id_pk='.$data.' order by Id asc');
+		$query = $this->db->query('select * from '.$this->table_Citizen.' where Id='.$data.' order by Id asc');
         return $query->getResult();
 		/*
         return  $this->db->table($this->table_board)->where($data)
@@ -79,7 +86,7 @@ class MasterModel extends Model
 
     public function getCitizens($status = false)
     {
-        $query = $this->db->query('select * from '.$this->table_Standard.' order by board_cor_id_pk asc');
+        $query = $this->db->query('select * from '.$this->table_Citizen.' order by Id asc');
         return $query->getResult();
         //$query = $this->db->table($this->table_board)->findAll();
         //return $query;
@@ -87,7 +94,7 @@ class MasterModel extends Model
 
     public function delCitizen($id)
     {
-		$query = $this->db->query('delete from '.$this->table_Standard.' where board_cor_id_pk='.$id.'');
+		$query = $this->db->query('delete from '.$this->table_Citizen.' where Id='.$id.'');
         return $query->getResult();
 		
        //return $this->db->table($this->table_board)->where($data)->delete(); 
@@ -100,19 +107,19 @@ class MasterModel extends Model
     /*Community */
 	public function saveCommunity($data)
 	{
-		$query = $this->db->table($this->table_Standard)->insert($data);
+		$query = $this->db->table($this->table_Community)->insert($data);
         return $query;
     }
 
     public function updateCommunity($data, $id)
     {
-        $query = $this->db->table($this->table_Standard)->update($data, array('board_cor_id_pk' => $id));
+        $query = $this->db->table($this->table_Community)->update($data, array('com_id_pk' => $id));
         return $query;
     }
 
     public function getCommunity($data)
     {
-		$query = $this->db->query('select * from '.$this->table_Standard.' where board_cor_id_pk='.$data.' order by Id asc');
+		$query = $this->db->query('select * from '.$this->table_Community.' where com_id_pk='.$data.' order by com_id_pk asc');
         return $query->getResult();
 		/*
         return  $this->db->table($this->table_board)->where($data)
@@ -122,7 +129,7 @@ class MasterModel extends Model
 
     public function getCommunitys($status = false)
     {
-        $query = $this->db->query('select * from '.$this->table_Standard.' order by board_cor_id_pk asc');
+        $query = $this->db->query('select * from '.$this->table_Community.' order by com_id_pk asc');
         return $query->getResult();
         //$query = $this->db->table($this->table_board)->findAll();
         //return $query;
@@ -130,7 +137,7 @@ class MasterModel extends Model
 
     public function delCommunity($id)
     {
-		$query = $this->db->query('delete from '.$this->table_Standard.' where board_cor_id_pk='.$id.'');
+		$query = $this->db->query('delete from '.$this->table_Community.' where com_id_pk='.$id.'');
         return $query->getResult();
 		
        //return $this->db->table($this->table_board)->where($data)->delete(); 
@@ -144,19 +151,19 @@ class MasterModel extends Model
     /*Religion*/
 	public function saveReligion($data)
 	{
-		$query = $this->db->table($this->table_Standard)->insert($data);
+		$query = $this->db->table($this->table_Religion)->insert($data);
         return $query;
     }
 
     public function updateReligion($data, $id)
     {
-        $query = $this->db->table($this->table_Standard)->update($data, array('board_cor_id_pk' => $id));
+        $query = $this->db->table($this->table_Religion)->update($data, array('rel_id_pk' => $id));
         return $query;
     }
 
     public function getReligion($data)
     {
-		$query = $this->db->query('select * from '.$this->table_Standard.' where board_cor_id_pk='.$data.' order by Id asc');
+		$query = $this->db->query('select * from '.$this->table_Religion.' where rel_id_pk='.$data.' order by rel_id_pk asc');
         return $query->getResult();
 		/*
         return  $this->db->table($this->table_board)->where($data)
@@ -166,7 +173,7 @@ class MasterModel extends Model
 
     public function getReligions($status = false)
     {
-        $query = $this->db->query('select * from '.$this->table_Standard.' order by board_cor_id_pk asc');
+        $query = $this->db->query('select * from '.$this->table_Religion.' order by rel_id_pk asc');
         return $query->getResult();
         //$query = $this->db->table($this->table_board)->findAll();
         //return $query;
@@ -174,7 +181,7 @@ class MasterModel extends Model
 
     public function delReligion($id)
     {
-		$query = $this->db->query('delete from '.$this->table_Standard.' where board_cor_id_pk='.$id.'');
+		$query = $this->db->query('delete from '.$this->table_Religion.' where rel_id_pk='.$id.'');
         return $query->getResult();
 		
        //return $this->db->table($this->table_board)->where($data)->delete(); 
@@ -184,19 +191,19 @@ class MasterModel extends Model
     /*Blood Group*/
 	public function saveBloodGroup($data)
 	{
-		$query = $this->db->table($this->table_Standard)->insert($data);
+		$query = $this->db->table($this->table_BloodGroup)->insert($data);
         return $query;
     }
 
     public function updateBloodGroup($data, $id)
     {
-        $query = $this->db->table($this->table_Standard)->update($data, array('board_cor_id_pk' => $id));
+        $query = $this->db->table($this->table_BloodGroup)->update($data, array('bld_id_pk' => $id));
         return $query;
     }
 
     public function getBloodGroup($data)
     {
-		$query = $this->db->query('select * from '.$this->table_Standard.' where board_cor_id_pk='.$data.' order by Id asc');
+		$query = $this->db->query('select * from '.$this->table_BloodGroup.' where bld_id_pk='.$data.' order by bld_id_pk asc');
         return $query->getResult();
 		/*
         return  $this->db->table($this->table_board)->where($data)
@@ -206,7 +213,7 @@ class MasterModel extends Model
 
     public function getBloodGroups($status = false)
     {
-        $query = $this->db->query('select * from '.$this->table_Standard.' order by board_cor_id_pk asc');
+        $query = $this->db->query('select * from '.$this->table_BloodGroup.' order by bld_id_pk asc');
         return $query->getResult();
         //$query = $this->db->table($this->table_board)->findAll();
         //return $query;
@@ -214,7 +221,7 @@ class MasterModel extends Model
 
     public function delBloodGroup($id)
     {
-		$query = $this->db->query('delete from '.$this->table_Standard.' where board_cor_id_pk='.$id.'');
+		$query = $this->db->query('delete from '.$this->table_BloodGroup.' where bld_id_pk='.$id.'');
         return $query->getResult();
 		
        //return $this->db->table($this->table_board)->where($data)->delete(); 
@@ -231,13 +238,13 @@ class MasterModel extends Model
 
     public function updateStandard($data, $id)
     {
-        $query = $this->db->table($this->table_Standard)->update($data, array('board_cor_id_pk' => $id));
+        $query = $this->db->table($this->table_Standard)->update($data, array('cst_id_pk' => $id));
         return $query;
     }
 
     public function getStandard($data)
     {
-		$query = $this->db->query('select * from '.$this->table_Standard.' where board_cor_id_pk='.$data.' order by Id asc');
+		$query = $this->db->query('select * from '.$this->table_Standard.' where cst_id_pk='.$data.' order by cst_id_pk asc');
         return $query->getResult();
 		/*
         return  $this->db->table($this->table_board)->where($data)
@@ -247,7 +254,7 @@ class MasterModel extends Model
 
     public function getStandards($status = false)
     {
-        $query = $this->db->query('select * from '.$this->table_Standard.' order by board_cor_id_pk asc');
+        $query = $this->db->query('select * from '.$this->table_Standard.' order by cst_id_pk asc');
         return $query->getResult();
         //$query = $this->db->table($this->table_board)->findAll();
         //return $query;
@@ -255,7 +262,7 @@ class MasterModel extends Model
 
     public function delStandard($id)
     {
-		$query = $this->db->query('delete from '.$this->table_Standard.' where board_cor_id_pk='.$id.'');
+		$query = $this->db->query('delete from '.$this->table_Standard.' where cst_id_pk='.$id.'');
         return $query->getResult();
 		
        //return $this->db->table($this->table_board)->where($data)->delete(); 
@@ -272,13 +279,13 @@ class MasterModel extends Model
 
     public function updateGroupname($data, $id)
     {
-        $query = $this->db->table($this->table_Groupname)->update($data, array('board_cor_id_pk' => $id));
+        $query = $this->db->table($this->table_Groupname)->update($data, array('brd_grp_id_pk' => $id));
         return $query;
     }
 
     public function getGroupname($data)
     {
-		$query = $this->db->query('select * from '.$this->table_Groupname.' where board_cor_id_pk='.$data.' order by Id asc');
+		$query = $this->db->query('select * from '.$this->table_Groupname.' where brd_grp_id_pk='.$data.' order by brd_grp_id_pk asc');
         return $query->getResult();
 		/*
         return  $this->db->table($this->table_board)->where($data)
@@ -288,7 +295,7 @@ class MasterModel extends Model
 
     public function getGroupnames($status = false)
     {
-        $query = $this->db->query('select * from '.$this->table_Groupname.' order by board_cor_id_pk asc');
+        $query = $this->db->query('select * from '.$this->table_Groupname.' order by brd_grp_id_pk asc');
         return $query->getResult();
         //$query = $this->db->table($this->table_board)->findAll();
         //return $query;
@@ -296,7 +303,7 @@ class MasterModel extends Model
 
     public function delGroupname($id)
     {
-		$query = $this->db->query('delete from '.$this->table_Groupname.' where board_cor_id_pk='.$id.'');
+		$query = $this->db->query('delete from '.$this->table_Groupname.' where brd_grp_id_pk='.$id.'');
         return $query->getResult();
 		
        //return $this->db->table($this->table_board)->where($data)->delete(); 
@@ -313,13 +320,13 @@ class MasterModel extends Model
 
     public function updateYear($data, $id)
     {
-        $query = $this->db->table($this->table_year)->update($data, array('board_cor_id_pk' => $id));
+        $query = $this->db->table($this->table_year)->update($data, array('ayd_id_pk' => $id));
         return $query;
     }
 
     public function getYear($data)
     {
-		$query = $this->db->query('select * from '.$this->table_year.' where board_cor_id_pk='.$data.' order by Id asc');
+		$query = $this->db->query('select * from '.$this->table_year.' where ayd_id_pk='.$data.' order by ayd_id_pk asc');
         return $query->getResult();
 		/*
         return  $this->db->table($this->table_board)->where($data)
@@ -329,7 +336,7 @@ class MasterModel extends Model
 
     public function getYears($status = false)
     {
-        $query = $this->db->query('select * from '.$this->table_year.' order by board_cor_id_pk asc');
+        $query = $this->db->query('select * from '.$this->table_year.' order by ayd_id_pk asc');
         return $query->getResult();
         //$query = $this->db->table($this->table_board)->findAll();
         //return $query;
@@ -337,7 +344,7 @@ class MasterModel extends Model
 
     public function delYear($id)
     {
-		$query = $this->db->query('delete from '.$this->table_year.' where board_cor_id_pk='.$id.'');
+		$query = $this->db->query('delete from '.$this->table_year.' where ayd_id_pk='.$id.'');
         return $query->getResult();
 		
        //return $this->db->table($this->table_board)->where($data)->delete(); 
@@ -362,7 +369,7 @@ class MasterModel extends Model
 
     public function getBoard($data)
     {
-		$query = $this->db->query('select * from '.$this->table_board.' where board_cor_id_pk='.$data.' order by Id asc');
+		$query = $this->db->query('select * from '.$this->table_board.' where board_cor_id_pk='.$data.' order by board_cor_id_pk asc');
         return $query->getResult();
 		/*
         return  $this->db->table($this->table_board)->where($data)

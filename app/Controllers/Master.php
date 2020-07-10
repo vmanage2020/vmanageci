@@ -288,13 +288,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"citizen" => $jsondata["citizen"],
-				"col_code_fk" => 1,
-				"status" => 0,
-				"create_by" => 1,
-				"create_date" => date('Y-m-d H:i:s'),
-				"edit_by" => 0,
-				"edit_date" => date('Y-m-d H:i:s')
+				"Citizens" => $jsondata["Citizens"]
 			);
 
 			$insertedData = $model->saveCitizen($data);
@@ -316,9 +310,7 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"citizen" => $jsondata["citizen"],
-				"edit_by" => 1,
-				"edit_date" => date('Y-m-d H:i:s')
+				"Citizens" => $jsondata["Citizens"]
 			);
 
 			$updatedData = $model->updateCitizen($data,$id);
@@ -336,7 +328,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'citizen_id_pk' => trim($id)
+				'Id' => trim($id)
 			);
 			$delData = $model->delCitizen($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -358,7 +350,7 @@ class Master extends Controller {
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'citizen_id_pk' => trim($type)
+				'Id' => trim($type)
 			);
 			
 			$data['citizens'] = $model->getCitizen($type);
@@ -705,7 +697,8 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"standard" => $jsondata["standard"],
+				"cst_name" => $jsondata["cst_name"],
+				"cst_acro" => $jsondata["cst_name"],
 				"col_code_fk" => 1,
 				"status" => 0,
 				"create_by" => 1,
@@ -733,7 +726,8 @@ class Master extends Controller {
 		{
 			
 			$data = array(
-				"standard" => $jsondata["standard"],
+				"cst_name" => $jsondata["cst_name"],
+				"cst_acro" => $jsondata["cst_name"],
 				"edit_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s')
 			);
@@ -753,7 +747,7 @@ class Master extends Controller {
 		else if( $id != null && $type=="delete")
 		{
 			$where = array(
-				'standard_id_pk' => trim($id)
+				'cst_id_pk' => trim($id)
 			);
 			$delData = $model->delStandard($id);
 			$affectedRows = $delData->connID->affected_rows;
@@ -775,7 +769,7 @@ class Master extends Controller {
 		elseif( $type != null && !$id )
 		{
 			$where = array(
-				'standard_id_pk' => trim($type)
+				'cst_id_pk' => trim($type)
 			);
 			
 			$data['standards'] = $model->getStandard($type);
