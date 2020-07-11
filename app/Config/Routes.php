@@ -146,6 +146,18 @@ $routes->delete('/api/student/(:any)', 'Student::delete/$1');
 $routes->post('/api/student/document', 'Student::document');
 $routes->post('/api/student/upload', 'Student::upload');
 
+
+//UserGroup API CALLs
+$routes->get('/api/usergroups', 'Group::index');
+$routes->get('/api/usergroup/(:any)', 'Group::view/$1');
+$routes->post('/api/usergroup', 'Group::create');
+$routes->post('/api/usergroup/update/(:any)', 'Group::update/$1');
+$routes->post('/api/usergroup/delete/(:any)', 'Group::delete/$1');
+$routes->put('/api/usergroup/(:any)', 'Group::update/$1');
+$routes->delete('/api/usergroup/(:any)', 'Group::delete/$1');
+
+
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
