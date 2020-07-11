@@ -9,7 +9,7 @@ class Group extends Controller {
 
     public function index()
     {
-        $data['function'] = "api_list_groups";
+        $data['function'] = "api_list_usergroups";
         $model = new GroupModel();
 
         $data['data'] = $model->getRows();
@@ -40,12 +40,11 @@ class Group extends Controller {
 
     public function create()
     {
-        $data['function'] = "api_save_student";
-		$model = new StudentModel();
-		$contactModel = new StudentContactModel();
-		$studentCertificateModel = new StudentCertificateModel();
+        $data['function'] = "api_save_usergroup";
+		$model = new GroupModel();
+		
 
-        $jsondata = json_decode(file_get_contents('php://input'), true);
+       /*  $jsondata = json_decode(file_get_contents('php://input'), true);
 		
 		if($jsondata["stu_prf_co_curr"]){
 			$stu_prf_co_curr = implode(",",$jsondata["stu_prf_co_curr"]);
@@ -59,11 +58,12 @@ class Group extends Controller {
 			$stu_prf_third_lang = "";
 		}
 		
-		$jsondata["stu_prf_app_date"] = date("Y-m-d");
+		$jsondata["stu_prf_app_date"] = date("Y-m-d"); */
 		
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
-				"stu_prf_stud_name" => $jsondata["stu_prf_stud_name"],
+                "stu_school_name" => $jsondata["stu_school_name"],
+                "stu_group_name" => $jsondata["stu_group_name"]/* ,
 				"stu_stud_mname" => $jsondata["stu_stud_mname"],
 				"stu_stud_lname" => $jsondata["stu_stud_lname"],
 				"stu_prf_dob" => $jsondata["stu_prf_dob"],
@@ -160,12 +160,12 @@ class Group extends Controller {
 				"create_date" => date('Y-m-d H:i:s'),
 				"create_by" => 1,
 				"edit_date" => date('Y-m-d H:i:s'),
-				"edit_by" => 0
+				"edit_by" => 0 */
 		);
 		
 		//echo '<pre>data->';print_r($data);die;
         
-		$insertedData = $model->saveStudent($data);
+		$insertedData = $model->saveGroup($data);
 		//echo '<pre>$insertedData->';print_r($insertedData);
 		$insertedID = $insertedData->connID->insert_id;
 
@@ -176,7 +176,7 @@ class Group extends Controller {
 				$data['return']['message'] = "Inserted Success";
 			}
 
-		if($insertedID>0)
+		/* if($insertedID>0)
 		{
 
 			$contactData = array(
@@ -246,7 +246,7 @@ class Group extends Controller {
 				$data['return']['contactmessage'] = "Contact Inserted Success";
 			}
 			
-		}
+		} */
 		else
 		{
 			$data['return']['message'] = "Error on Insert";
@@ -285,12 +285,12 @@ class Group extends Controller {
 	public function update($id)
     {
 
-		$data['function'] = "api_update_student";
-        $model = new StudentModel();
-		$contactModel = new StudentContactModel();
-		$studentCertificateModel = new StudentCertificateModel();
+		$data['function'] = "api_update_usergroup";
+        $model = new GroupModel();
+		/* $contactModel = new StudentContactModel();
+		$studentCertificateModel = new StudentCertificateModel(); */
 
-        $jsondata = json_decode(file_get_contents('php://input'), true);
+       /*  $jsondata = json_decode(file_get_contents('php://input'), true);
 		
 		if($jsondata["stu_prf_co_curr"]){
 			$stu_prf_co_curr = implode(",",$jsondata["stu_prf_co_curr"]);
@@ -302,12 +302,12 @@ class Group extends Controller {
 			$stu_prf_third_lang = implode(",",$jsondata["stu_prf_third_lang"]);
 		} else {
 			$stu_prf_third_lang = "";
-		}
+		} */
 		
 		$data = array(
-				"col_code_fk" => $jsondata["col_code_fk"],
-				"stu_prf_stud_name" => $jsondata["stu_prf_stud_name"],
-				"stu_stud_mname" => $jsondata["stu_stud_mname"],
+            "col_code_fk" => $jsondata["col_code_fk"],
+            "stu_school_name" => $jsondata["stu_school_name"],
+            "stu_group_name" => $jsondata["stu_group_name"]/* ,
 				"stu_stud_lname" => $jsondata["stu_stud_lname"],
 				"stu_prf_dob" => $jsondata["stu_prf_dob"],
 				"stu_prf_sex" => $jsondata["stu_prf_sex"],
@@ -397,16 +397,16 @@ class Group extends Controller {
 				"stu_foreign_visa_no" => $jsondata["stu_foreign_visa_no"],
 				"stu_foreign_visa_valid_date" => $jsondata["stu_foreign_visa_valid_date"],
 				"edit_date" => date('Y-m-d H:i:s'),
-				"edit_by" => 0
+				"edit_by" => 0 */
 		);
 		
 		
 		//echo '<pre>data->';print_r($data);die;
         
-		$updatedData = $model->updateStudent($data, $id);
+		$updatedData = $model->updateGroup($data, $id);
 		//echo '<pre>$$updatedData->';print_r($$updatedData);die;
 		//$insertedID = $insertedData->connID->insert_id;
-		if( $updatedData )
+		/* if( $updatedData )
 		{
 			$lastInsertId = $id;
 
@@ -481,7 +481,7 @@ class Group extends Controller {
 		else
 		{
 			$data['return']['message'] = "Error on Insert";
-		}
+		} */
 		
 		//echo '<pre>$insertedData->';print_r($insertedData);die;
 
@@ -491,21 +491,22 @@ class Group extends Controller {
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
 		echo json_encode($data, JSON_NUMERIC_CHECK);
 		
-	}
+    }
+    
 
 	public function delete($id)
     {
 
-		$data['function'] = "api_delete_student";
-        $model = new StudentModel();
-		$contactModel = new StudentContactModel();
-		$studentCertificateModel = new StudentCertificateModel();
+		$data['function'] = "api_delete_usergroup";
+        $model = new GroupModel();
+	/* 	$contactModel = new StudentContactModel();
+		$studentCertificateModel = new StudentCertificateModel(); */
 
 		if( $id != null)
 		{
 			$delStudData = $model->delRow($id);
 			$affectedStudRows = $delStudData->connID->affected_rows;
-			if( $affectedStudRows )
+			/* if( $affectedStudRows )
 			{
 				$delStudContData = $contactModel->delRow($id);
 				$affectedStudContRows = $delStudContData->connID->affected_rows;
@@ -519,7 +520,8 @@ class Group extends Controller {
 						$data['return']['message'] = "Deleted Success";
 					}
 				}
-			}
+            } */
+            
 		}else{
 			$data['return']['message'] = "Error on delete";
 		}
@@ -532,26 +534,7 @@ class Group extends Controller {
 	}
 	
 	
-	public function upload()
-    {
-		
-		$avatar = $this->request->getFile('file');
-        $avatarName = $avatar->getRandomName();
-		$avatar->move(WRITEPATH . 'uploads',$avatarName);
- 
-          $fileinfo = [ 
-            'name' =>  $avatar->getClientName(),
-            'type'  => $avatar->getClientMimeType()
-          ];
-		  
-		$data['filename']=$avatarName;
 
-		header('Content-type: application/json');
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
-        echo json_encode($data, JSON_NUMERIC_CHECK);
-	}
     
 
 }
