@@ -8,12 +8,19 @@ class GroupModel extends Model
 
     public function getRows()
     {
-
- 
-        return $this->findAll();
-  
-
+         return $this->findAll();
     }
 
-  
+    public function getRow($id)
+    {
+        $query = $this->db->query('select * from '.$this->table.' where grps_id_pk='.$id.' order by grps_id_pk asc');
+        return $query->getResult();
+        /*
+        return  $this->db->table($this->table_board)->where($data)
+        ->first();
+        */
+    }
+
+
 }
+

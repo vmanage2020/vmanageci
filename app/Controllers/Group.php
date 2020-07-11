@@ -12,7 +12,7 @@ class Group extends Controller {
         $data['function'] = "api_list_groups";
         $model = new GroupModel();
 
-        $data['users'] = $model->getRows();
+        $data['data'] = $model->getRows();
 
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
@@ -22,43 +22,14 @@ class Group extends Controller {
 
     }
     
-	public function document()
-	{
 
-		$avatar = $this->request->getFile('certificate');
-        $avatarName = $avatar->getRandomName();
-		$avatar->move(WRITEPATH . 'uploads',$avatarName);
- 
-          $fileinfo = [ 
-            'name' =>  $avatar->getClientName(),
-            'type'  => $avatar->getClientMimeType()
-          ];
-		  
-		$data['filename']=$avatarName;
-
-		header('Content-type: application/json');
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
-		echo json_encode($data, JSON_NUMERIC_CHECK);
-		
-		
-	}
 
     public function view($id=null)
     {
-        $data['function'] = "api_view_student";
-		$model = new StudentModel();
-		$contactModel = new StudentContactModel();
-		$studentCertificateModel = new StudentCertificateModel();
+        $data['function'] = "api_view_usergroup";
+		$model = new GroupModel();
 
-        /* $where = array(
-            'stu_prf_id_pk' => $id
-        );
-        $data['where'] = $where; */
-
-		$data['student'] = $model->viewRow($id);
-		$data['studentdocument'] = $studentCertificateModel->viewsRowByStudent($id);
+		$data['data'] = $model->getRow($id);
         
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
