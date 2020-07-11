@@ -156,6 +156,14 @@ $routes->post('/api/usergroup/delete/(:any)', 'Group::delete/$1');
 $routes->put('/api/usergroup/(:any)', 'Group::update/$1');
 $routes->delete('/api/usergroup/(:any)', 'Group::delete/$1');
 
+//User API CALLs
+$routes->get('/api/users', 'User::index');
+$routes->get('/api/user/(:any)', 'User::view/$1');
+$routes->post('/api/user', 'User::create');
+$routes->post('/api/user/update/(:any)', 'User::update/$1');
+$routes->post('/api/user/delete/(:any)', 'User::delete/$1');
+$routes->put('/api/user/(:any)', 'User::update/$1');
+$routes->delete('/api/user/(:any)', 'User::delete/$1');
 
 
 /**

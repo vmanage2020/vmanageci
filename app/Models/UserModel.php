@@ -6,6 +6,19 @@ class UserModel extends Model
 {
     protected $table = 'gn_ms_users';
 
+    public function getRows()
+    {
+         return $this->findAll();
+    }
+
+    public function getRow($id)
+    {
+        $query = $this->db->query('select * from '.$this->table.' where grps_id_pk='.$id.' order by grps_id_pk asc');
+        return $query->getResult();
+        
+    }
+
+
     public function checkUsers($data)
     {
     

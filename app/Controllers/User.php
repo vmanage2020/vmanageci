@@ -22,28 +22,7 @@ class User extends Controller {
 
     }
     
-	public function document()
-	{
-
-		$avatar = $this->request->getFile('certificate');
-        $avatarName = $avatar->getRandomName();
-		$avatar->move(WRITEPATH . 'uploads',$avatarName);
- 
-          $fileinfo = [ 
-            'name' =>  $avatar->getClientName(),
-            'type'  => $avatar->getClientMimeType()
-          ];
-		  
-		$data['filename']=$avatarName;
-
-		header('Content-type: application/json');
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
-		echo json_encode($data, JSON_NUMERIC_CHECK);
-		
-		
-	}
+	
 
     public function view($id=null)
     {
