@@ -910,7 +910,7 @@ class Master extends Controller {
 			
 			$data = array(
 				"ayd_start_year" => $jsondata["ayd_start_year"],
-				"ayd_end_year" => 0,
+				"ayd_end_year" => $jsondata["ayd_start_year"],
 				"col_code_fk" => 0,
 				"status" => 0,
 				"create_by" => 1,
