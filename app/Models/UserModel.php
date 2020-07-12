@@ -39,4 +39,12 @@ public function updateUser($data, $id)
     $query = $this->db->table($this->table)->update($data, array('users_id_pk' => $id));
     return $query;
 }
+
+public function checkUsers($data)
+    {
+    
+        return $this->where($data)
+                ->first();
+    }
+	
 }
