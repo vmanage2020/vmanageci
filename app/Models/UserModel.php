@@ -13,28 +13,30 @@ class UserModel extends Model
 
     public function getRow($id)
     {
-        $query = $this->db->query('select * from '.$this->table.' where grps_id_pk='.$id.' order by grps_id_pk asc');
+        $query = $this->db->query('select * from '.$this->table.' where users_id_pk='.$id.' order by users_id_pk asc');
         return $query->getResult();
         
     }
 
-
-    public function checkUsers($data)
-    {
+//save, update, delete
+public function delRow($id)
+{
+    $query = $this->db->query('delete from '.$this->table.' where users_id_pk='.$id.'');
+    return $query->getResult();
     
-        return $this->where($data)
-                ->first();
-    }
-    
-    public function getUsers($status = false)
-    {
-    if ($status === false)
-    {
-        return $this->findAll();
-    }
+//return $this->db->table($this->table_board)->where($data)->delete(); 
+} 
 
-    return $this->asArray()
-                ->where(['status' => $status])
-                ->first();
-    }
+
+public function saveUser($data)
+{
+    $query = $this->db->table($this->table)->insert($data);
+    return $query;
+}
+
+public function updateUser($data, $id)
+{
+    $query = $this->db->table($this->table)->update($data, array('users_id_pk' => $id));
+    return $query;
+}
 }
