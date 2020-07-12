@@ -21,7 +21,7 @@ class GroupModel extends Model
 //save, update, delete
     public function delRow($id)
     {
-        $query = $this->db->query('delete from '.$this->table_year.' where grps_id_pk='.$id.'');
+        $query = $this->db->query('delete from '.$this->table.' where grps_id_pk='.$id.'');
         return $query->getResult();
         
     //return $this->db->table($this->table_board)->where($data)->delete(); 
@@ -30,13 +30,13 @@ class GroupModel extends Model
 
     public function saveGroup($data)
     {
-        $query = $this->db->table($this->table_board)->insert($data);
+        $query = $this->db->table($this->table)->insert($data);
         return $query;
     }
 
     public function updateGroup($data, $id)
     {
-        $query = $this->db->table($this->table_board)->update($data, array('grps_id_pk' => $id));
+        $query = $this->db->table($this->table)->update($data, array('grps_id_pk' => $id));
         return $query;
     }
 
