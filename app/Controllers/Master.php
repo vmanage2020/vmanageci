@@ -41,6 +41,87 @@ class Master extends Controller {
 			$activity_array[] = array( "id" => $activity->Id, "name" => $activity->Activity );
 		}
 		$data['activities'] = $activity_array;
+		
+		
+		//$data['certificates'] = $model->getCertificateNames();
+		$certificate_array = array();
+		$certificates = $model->getCertificateNames();
+		foreach($certificates as $certificate)
+		{
+			$certificate_array[] = array( "id" => $certificate->crt_ms_id_pk, "name" => $certificate->crt_ms_name );
+		}
+		$data['certificates'] = $certificate_array;
+		
+		//$data['citizens'] = $model->getCitizens();
+		$citizen_array = array();
+		$citizens = $model->getCitizens();
+		foreach($citizens as $citizen)
+		{
+			$citizen_array[] = array( "id" => $citizen->Id, "name" => $citizen->Citizens );
+		}
+		$data['citizens'] = $citizen_array;
+		
+		//$data['communities'] = $model->getCommunitys();
+		$community_array = array();
+		$communities = $model->getCommunitys();
+		foreach($communities as $community)
+		{
+			$community_array[] = array( "id" => $community->com_id_pk, "name" => $community->com_des );
+		}
+		$data['communities'] = $community_array;
+		
+		//$data['religions'] = $model->getReligions();
+		$religion_array = array();
+		$religions = $model->getReligions();
+		foreach($religions as $religion)
+		{
+			$religion_array[] = array( "id" => $religion->rel_id_pk, "name" => $religion->rel_des );
+		}
+		$data['religions'] = $religion_array;
+		
+		//$data['bloodgroups'] = $model->getBloodGroups();
+		$bloodgroup_array = array();
+		$bloodgroups = $model->getBloodGroups();
+		foreach($bloodgroups as $bloodgroup)
+		{
+			$bloodgroup_array[] = array( "id" => $bloodgroup->bld_id_pk, "name" => $bloodgroup->bld_des );
+		}
+		$data['bloodgroups'] = $bloodgroup_array;
+		
+		
+		//$data['standards'] = $model->getStandards();
+		$standard_array = array();
+		$standards = $model->getStandards();
+		foreach($standards as $standard)
+		{
+			$standard_array[] = array( "id" => $standard->cst_id_pk, "name" => $standard->cst_name );
+		}
+		$data['standards'] = $standard_array;
+		
+		//$data['groups'] = $model->getGroupnames();
+		$group_array = array();
+		$groups = $model->getGroupnames();
+		foreach($groups as $group)
+		{
+			$group_array[] = array( "id" => $group->brd_grp_id_pk, "name" => $group->brd_grp_name );
+		}
+		$data['groups'] = $group_array;
+		
+		
+		//$data['years'] = $model->getYears();
+		$year_array = array();
+		$years = $model->getYears();
+		foreach($years as $year)
+		{
+			$year_array[] = array( "id" => $year->ayd_id_pk, "name" => $year->ayd_start_year );
+		}
+		$data['years'] = $year_array;
+		
+		
+		
+		
+		
+
 
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
