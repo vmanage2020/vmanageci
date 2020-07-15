@@ -28,7 +28,7 @@ class User extends Controller {
     {
         $data['function'] = "api_view_user";
 		$model = new UserModel();
-		$data['data'] = $model->viewRow($id);
+		$data['data'] = $model->getRow($id);
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -41,7 +41,7 @@ class User extends Controller {
         $data['function'] = "api_save_user";
 		$model = new UserModel();
 
-		
++		
 		$data = array(
 				"col_code_fk" => $jsondata["col_code_fk"],
 				"grps_id_fk" => $jsondata["grps_id_fk"],
