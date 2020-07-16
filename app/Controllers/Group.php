@@ -42,15 +42,19 @@ class Group extends Controller {
     {
         $data['function'] = "api_save_usergroup";
 		$model = new GroupModel();
-		
+        
+        $jsondata = json_decode(file_get_contents('php://input'), true);
 
-
-		
-		$data = array(
-				"col_code_fk" => $jsondata["col_code_fk"],
-                "grps_desc" => $jsondata["grps_desc"]
-		);
-		
+        $data = array(
+            "grps_desc" => $jsondata["grps_desc"], 
+            "col_code_fk" => 1,
+            "status" => 0,
+            "create_by" => 1,
+            "create_date" => date('Y-m-d H:i:s'),
+            "edit_by" => 0,
+            "edit_date" => date('Y-m-d H:i:s')
+        );
+		 
 		//echo '<pre>data->';print_r($data);die;
         
 		$insertedData = $model->saveGroup($data);
@@ -87,16 +91,17 @@ class Group extends Controller {
 		$data['function'] = "api_update_usergroup";
         $model = new GroupModel();
 
-		$data = array(
-			"col_code_fk" => $jsondata["col_code_fk"],
-			"grps_desc" => $jsondata["grps_desc"]
-		);
-		
-		
-		
-        
-		$updatedData = $model->updateGroup($data, $id);
+        $jsondata = json_decode(file_get_contents('php://input'), true);
 
+		$data = array(
+            "grps_desc" => $jsondata["grps_desc"], 
+            "col_code_fk" => 1,
+            "status" => 0,
+            "edit_by" => 1,
+            "edit_date" => date('Y-m-d H:i:s')
+        );
+		
+		$updatedData = $model->updateGroup($data, $id);
 
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
@@ -118,7 +123,7 @@ class Group extends Controller {
 		{
 			$delStudData = $model->delRow($id);
 			$affectedStudRows = $delStudData->connID->affected_rows;
-
+            $data['return']['message'] = "delete done";
             
 		}else{
 			$data['return']['message'] = "Error on delete";

@@ -41,4 +41,3 @@ class GroupModel extends Model
     }
 
 }
-
