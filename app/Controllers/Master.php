@@ -1269,6 +1269,108 @@ class Master extends Controller {
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+
+	
+	public function section($type=null,$id=null)
+    {
+        $data['function'] = "api_section";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"sec_des" => $jsondata["sec_des"],
+				"col_code_fk" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+ 
+			$insertedData = $model->saveSection($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getSection($insertedID);
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"sec_des" => $jsondata["sec_des"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateSection($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['data'] = $model->getSection($id);
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'Id' => trim($id)
+			);
+			$delData = $model->delSection($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['sections'] = $model->getSections();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'Id' => trim($type)
+			);
+			$data['sections'] = $model->getSection($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
     }
 
 }

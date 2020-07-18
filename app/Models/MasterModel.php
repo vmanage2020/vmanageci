@@ -17,6 +17,7 @@ class MasterModel extends Model
     protected $table_Certificate = 'ac_ms_cert_master';
     protected $table_Citizen = 'tbl_citizen';
     protected $table_Standard = 'ac_ms_com_stds';
+    protected $table_Section = 'ac_ms_sections';
       
   
  /*Certificate */
@@ -476,6 +477,46 @@ class MasterModel extends Model
 		
        //return $this->db->table($this->table_lang)->where($data)->delete(); 
     }
+ 
+
+     /* Section */
+     public function saveSection($data)
+     {
+         $query = $this->db->table($this->table_Section)->insert($data);
+         return $query;
+     }
+ 
+     public function updateSection($data, $id)
+     {
+         $query = $this->db->table($this->table_Section)->update($data, array('sec_id_pk' => $id));
+         return $query;
+     }
+ 
+     public function getSection($data)
+     {
+         $query = $this->db->query('select * from '.$this->table_Section.' where sec_id_pk='.$data.' order by sec_id_pk asc');
+         return $query->getResult();
+         /*
+         return  $this->db->table($this->table_Section)->where($data)
+         ->first();
+         */
+     }
+ 
+     public function getSections($status = false)
+     {
+         $query = $this->db->query('select * from '.$this->table_Section.' order by sec_id_pk asc');
+         return $query->getResult();
+         //$query = $this->db->table($this->table_Section)->findAll();
+         //return $query;
+     }
+ 
+     public function delSection($id)
+     {
+         $query = $this->db->query('delete from '.$this->table_Section.' where sec_id_pk='.$id.'');
+         return $query->getResult();
+         
+        //return $this->db->table($this->table_Section)->where($data)->delete(); 
+     }
  
 
 }

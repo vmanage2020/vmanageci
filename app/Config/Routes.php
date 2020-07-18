@@ -134,6 +134,16 @@ $routes->post('/api/certificatename/delete/(:any)', 'Master::certificatename/del
 $routes->put('/api/certificatename/update/(:any)', 'Master::certificatename/update/$1'); // update data
 $routes->delete('/api/certificatename/delete/(:any)', 'Master::certificatename/delete/$1'); // delete data
 
+
+$routes->get('/api/section', 'Master::section'); // getAll
+$routes->get('/api/section/(:any)', 'Master::section/$1'); // get by id
+$routes->post('/api/section/add', 'Master::section/add'); // Add data
+$routes->post('/api/section/update/(:any)', 'Master::section/update/$1'); // update data
+$routes->post('/api/section/delete/(:any)', 'Master::section/delete/$1'); // delete data
+$routes->put('/api/section/update/(:any)', 'Master::section/update/$1'); // update data
+$routes->delete('/api/section/delete/(:any)', 'Master::section/delete/$1'); // delete data
+
+
 //STUDENT API CALLs
 $routes->get('/api/students', 'Student::index');
 $routes->get('/api/student/(:any)', 'Student::view/$1');

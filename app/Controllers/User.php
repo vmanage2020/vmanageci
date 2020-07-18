@@ -41,15 +41,16 @@ class User extends Controller {
         $data['function'] = "api_save_user";
 		$model = new UserModel();
 
-+		
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+		
 		$data = array(
-				"col_code_fk" => $jsondata["col_code_fk"],
+				"col_code_fk" => 1,
 				"grps_id_fk" => $jsondata["grps_id_fk"],
-				"users_appl_userid_fk" => $jsondata["users_appl_userid_fk"],
-				"users_dept_code_fk" => $jsondata["users_dept_code_fk"],
+				"users_appl_userid_fk" => 1,
+				"users_dept_code_fk" => 1,
 				"users_name" => $jsondata["users_name"],
 				"users_pwd" => $jsondata["users_pwd"],
-				"users_type" => $jsondata["users_type"]
+				"users_type" => 1
 		);
 		
 		//echo '<pre>data->';print_r($data);die;
@@ -84,17 +85,19 @@ class User extends Controller {
     {
 
 		$data['function'] = "api_update_user";
-        $model = new UserModel();
+		$model = new UserModel();
+		
+		$jsondata = json_decode(file_get_contents('php://input'), true);
 		
 		$data = array(
-			"col_code_fk" => $jsondata["col_code_fk"],
+			"col_code_fk" => 1,
 			"grps_id_fk" => $jsondata["grps_id_fk"],
-			"users_appl_userid_fk" => $jsondata["users_appl_userid_fk"],
-			"users_dept_code_fk" => $jsondata["users_dept_code_fk"],
+			"users_appl_userid_fk" => 1,
+			"users_dept_code_fk" => 1,
 			"users_name" => $jsondata["users_name"],
 			"users_pwd" => $jsondata["users_pwd"],
-			"users_type" => $jsondata["users_type"]
-		);
+			"users_type" => 1
+	);
 		
 		
 		//echo '<pre>data->';print_r($data);die;
@@ -141,6 +144,7 @@ class User extends Controller {
 		{
 			$delStudData = $model->delRow($id);
 			$affectedStudRows = $delStudData->connID->affected_rows;
+			$data['return']['message'] = "data deleted";
 			
 		}else{
 			$data['return']['message'] = "Error on delete";
