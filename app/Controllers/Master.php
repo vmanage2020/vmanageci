@@ -108,6 +108,16 @@ class Master extends Controller {
 		$data['groups'] = $group_array;
 		
 		
+		//$data['sections'] = $model->getSections();
+		$section_array = array();
+		$sections = $model->getSections();
+		foreach($sections as $year)
+		{
+			$section_array[] = array( "id" => $year->sec_id_pk, "name" => $year->sec_des );
+		}
+		$data['sections'] = $section_array;
+		
+		
 		//$data['years'] = $model->getYears();
 		$year_array = array();
 		$years = $model->getYears();
@@ -116,6 +126,16 @@ class Master extends Controller {
 			$year_array[] = array( "id" => $year->ayd_id_pk, "name" => $year->ayd_start_year );
 		}
 		$data['years'] = $year_array;
+		
+		//$data['schools'] = $model->getSchools();
+		$school_array = array();
+		$schools = $model->getSchools();
+		foreach($schools as $year)
+		{
+			$school_array[] = array( "id" => $year->col_code_pk, "name" => $year->col_collname, "code" => $year->col_upincode );
+		}
+		$data['schools'] = $school_array;
+		
 		
 		
 		

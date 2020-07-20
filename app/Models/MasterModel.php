@@ -18,6 +18,7 @@ class MasterModel extends Model
     protected $table_Citizen = 'tbl_citizen';
     protected $table_Standard = 'ac_ms_com_stds';
     protected $table_Section = 'ac_ms_sections';
+	protected $table_School = 'ac_ms_college';
       
   
  /*Certificate */
@@ -516,6 +517,46 @@ class MasterModel extends Model
          return $query->getResult();
          
         //return $this->db->table($this->table_Section)->where($data)->delete(); 
+     }
+	 
+	 
+	  /* School */
+     public function saveSchool($data)
+     {
+         $query = $this->db->table($this->table_School)->insert($data);
+         return $query;
+     }
+ 
+     public function updateSchool($data, $id)
+     {
+         $query = $this->db->table($this->table_School)->update($data, array('col_code_pk' => $id));
+         return $query;
+     }
+ 
+     public function getSchool($data)
+     {
+         $query = $this->db->query('select * from '.$this->table_Section.' where col_code_pk='.$data.' order by col_code_pk asc');
+         return $query->getResult();
+         /*
+         return  $this->db->table($this->table_School)->where($data)
+         ->first();
+         */
+     }
+ 
+     public function getSchools($status = false)
+     {
+         $query = $this->db->query('select * from '.$this->table_School.' order by col_code_pk asc');
+         return $query->getResult();
+         //$query = $this->db->table($this->table_School)->findAll();
+         //return $query;
+     }
+ 
+     public function delSchool($id)
+     {
+         $query = $this->db->query('delete from '.$this->table_School.' where col_code_pk='.$id.'');
+         return $query->getResult();
+         
+        //return $this->db->table($this->table_School)->where($data)->delete(); 
      }
  
 

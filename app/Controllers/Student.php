@@ -21,6 +21,36 @@ class Student extends Controller {
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         echo json_encode($data, JSON_NUMERIC_CHECK);
 
+	}
+	
+	public function selected()
+    {
+        $data['function'] = "api_list_selected_student";
+        $model = new StudentModel();
+
+        $data['users'] = $model->getRows();
+
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+
+	}
+	
+	public function management()
+    {
+        $data['function'] = "api_list_management_student";
+        $model = new StudentModel();
+
+        $data['users'] = $model->getRows();
+
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+
     }
     
 	public function document()
@@ -584,4 +614,40 @@ class Student extends Controller {
 	}
     
 
+	
+	public function statusupdate($id,$status)
+    {
+
+		$data['function'] = "api_update_student";
+        $model = new StudentModel();
+		 
+        $jsondata = json_decode(file_get_contents('php://input'), true);
+		
+		$data = array(
+				"status" => $status
+		);
+		
+		//echo '<pre>data->';print_r($data);die;
+        
+		$updatedData = $model->updateStudent($data, $id);
+		//echo '<pre>$$updatedData->';print_r($$updatedData);die;
+		//$insertedID = $insertedData->connID->insert_id;
+		if( $updatedData )
+		{
+			$data['return']['message'] = "Status Updated";			
+		}
+		else
+		{
+			$data['return']['message'] = "Error on Insert";
+		}
+		
+		//echo '<pre>$insertedData->';print_r($insertedData);die;
+
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+		echo json_encode($data, JSON_NUMERIC_CHECK);
+		
+	}
 }
