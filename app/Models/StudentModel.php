@@ -39,6 +39,8 @@ class StudentModel extends Model
     if ($status === false)
     {
         return $this->findAll();
+    } else {
+        return $this->where('status', $status)->findAll();        
     }
 
     }
