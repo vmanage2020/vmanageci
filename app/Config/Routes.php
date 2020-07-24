@@ -156,6 +156,7 @@ $routes->delete('/api/student/(:any)', 'Student::delete/$1');
 $routes->post('/api/student/document', 'Student::document');
 $routes->post('/api/student/upload', 'Student::upload');
 
+$routes->post('/api/student/approvedapplication', 'Student::approvedapplication');
 $routes->post('/api/student/assignupdate/(:any)/(:any)', 'Student::assignupdate/$1/$2');
 $routes->post('/api/student/statusupdate/(:any)/(:any)', 'Student::statusupdate/$1/$2');
 $routes->get('/api/students/applicationpaid', 'Student::applicationpaid');

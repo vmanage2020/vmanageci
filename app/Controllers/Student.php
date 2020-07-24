@@ -666,6 +666,55 @@ class Student extends Controller {
 		
 	}
 
+	public function approvedapplication()
+    {
+		//echo $stdid;
+		//echo $secid;
+
+		$status = 1;
+		$data['function'] = "api_update_student";
+        $model = new StudentModel();
+		 
+        $jsondata = json_decode(file_get_contents('php://input'), true);
+		
+		foreach($jsondata as $jd) {
+				$sid = $jd['id'];
+
+				$data = array(
+					"status" => $status
+				);
+
+				//echo '<pre>data->';print_r($data);
+        
+				$updatedData = $model->updateStudent($data, $sid);
+
+				
+		}
+		//echo '<pre>data->';print_r($jsondata);die;
+        
+		//$updatedData = $model->updateStudent($data, $id);
+		//echo '<pre>$$updatedData->';print_r($$updatedData);die;
+		//$insertedID = $insertedData->connID->insert_id;
+
+		$updatedData = 1;
+		if( $updatedData )
+		{
+			$data['return']['message'] = "Status Updated";			
+		}
+		else
+		{
+			$data['return']['message'] = "Error on Insert";
+		}
+		
+		//echo '<pre>$insertedData->';print_r($insertedData);die;
+
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+		echo json_encode($data, JSON_NUMERIC_CHECK);
+		
+	}
 
 	public function assignupdate($stdid,$secid)
     {
