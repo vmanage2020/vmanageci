@@ -1391,6 +1391,615 @@ class Master extends Controller {
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+
+	public function catagorytype($type=null,$id=null)
+    {
+        $data['function'] = "api_catagorytype";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"sct_desc" => $jsondata["sct_desc"],
+				"col_code_fk" => 0,
+				"sct_ledger_code" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+ 
+			$insertedData = $model->saveCatagorytype($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getCatagorytype($insertedID);
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"sct_desc" => $jsondata["sct_desc"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateCatagorytype($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['data'] = $model->getCatagorytype($id);
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'sct_id_pk' => trim($id)
+			);
+			$delData = $model->delCatagorytype($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['catagorytypes'] = $model->getCatagorytypes();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'sct_id_pk' => trim($type)
+			);
+			$data['catagorytypes'] = $model->getCatagorytype($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+
+	public function designationtype($type=null,$id=null)
+    {
+        $data['function'] = "api_designationtype";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"dsg_desc" => $jsondata["dsg_desc"],
+				"col_code_fk" => 0,
+				"dsg_acronym" => 0,
+				"dsg_priority" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+ 
+			$insertedData = $model->saveDesignationtype($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getDesignationtype($insertedID);
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"dsg_desc" => $jsondata["dsg_desc"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateDesignationtype($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['data'] = $model->getDesignationtype($id);
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'dsg_id_pk' => trim($id)
+			);
+			$delData = $model->delDesignationtype($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['designationtypes'] = $model->getDesignationtypes();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'dsg_id_pk' => trim($type)
+			);
+			$data['designationtypes'] = $model->getDesignationtype($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+
+	public function stafftype($type=null,$id=null)
+    {
+        $data['function'] = "api_stafftype";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"stf_tye_des" => $jsondata["stf_tye_des"],
+				"col_code_fk" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+ 
+			$insertedData = $model->saveStafftype($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getStafftype($insertedID);
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"stf_tye_des" => $jsondata["stf_tye_des"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateStafftype($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['data'] = $model->getStafftype($id);
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'stf_tye_id_pk' => trim($id)
+			);
+			$delData = $model->delStafftype($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['stafftypes'] = $model->getStafftypes();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'stf_tye_id_pk' => trim($type)
+			);
+			$data['stafftypes'] = $model->getStafftype($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+
+	public function department($type=null,$id=null)
+    {
+        $data['function'] = "api_department";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"dpt_name" => $jsondata["dpt_name"],
+				"col_code_fk" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+ 
+			$insertedData = $model->saveDepartment($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getDepartment($insertedID);
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"dpt_name" => $jsondata["dpt_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateDepartment($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['data'] = $model->getDepartment($id);
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'dpt_id_pk' => trim($id)
+			);
+			$delData = $model->delDepartment($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['departments'] = $model->getDepartments();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'dpt_id_pk' => trim($type)
+			);
+			$data['departments'] = $model->getDepartment($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+
+	public function degree($type=null,$id=null)
+    {
+        $data['function'] = "api_degree";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"cor_name" => $jsondata["cor_name"],
+				"col_code_fk" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+ 
+			$insertedData = $model->saveDegree($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getDegree($insertedID);
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"cor_name" => $jsondata["cor_name"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateDegree($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['data'] = $model->getDegree($id);
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'cor_id_pk' => trim($id)
+			);
+			$delData = $model->delDegree($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['degrees'] = $model->getDegrees();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'cor_id_pk' => trim($type)
+			);
+			$data['degrees'] = $model->getDegree($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
+	}
+	
+
+	public function grade($type=null,$id=null)
+    {
+        $data['function'] = "api_grade";
+        $model = new MasterModel();
+
+		$jsondata = json_decode(file_get_contents('php://input'), true);
+
+		if( $id == null && $type=="add")
+		{
+			
+			$data = array(
+				"grd_des" => $jsondata["grd_des"],
+				"col_code_fk" => 0,
+				"status" => 0,
+				"create_by" => 1,
+				"create_date" => date('Y-m-d H:i:s'),
+				"edit_by" => 0,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+ 
+			$insertedData = $model->saveGrade($data);
+
+			$insertedID = $insertedData->connID->insert_id;
+			if($insertedID>0)
+			{
+				$lastInsertId = $insertedID;
+				$data['return']['insertid'] = $insertedID;
+				$data['return']['data'] = $model->getGrade($insertedID);
+				$data['return']['message'] = "Inserted Success";
+			}
+			else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		}
+		else if( $id != null && $type=="update")
+		{
+			
+			$data = array(
+				"grd_des" => $jsondata["grd_des"],
+				"edit_by" => 1,
+				"edit_date" => date('Y-m-d H:i:s')
+			);
+
+			$updatedData = $model->updateGrade($data,$id);
+
+			if( $updatedData )
+			{
+				$data['return']['data'] = $model->getGrade($id);
+				$data['return']['message'] = "Updated Success";
+			}else
+			{
+				$data['return']['message'] = "Error on Insert";
+			}
+		
+		}
+		else if( $id != null && $type=="delete")
+		{
+			$where = array(
+				'grd_id_pk' => trim($id)
+			);
+			$delData = $model->delGrade($id);
+			$affectedRows = $delData->connID->affected_rows;
+			$affectedRows = 1;
+			if( $affectedRows )
+			{
+				$data['return']['message'] = "Deleted Success";
+			}else
+			{
+				$data['return']['message'] = "Error on delete";
+			}
+		}
+		elseif( !$id && !$type )
+		{
+			
+			$data['grades'] = $model->getGrades();
+			
+		}
+		elseif( $type != null && !$id )
+		{
+			$where = array(
+				'grd_id_pk' => trim($type)
+			);
+			$data['grades'] = $model->getGrade($type);
+			
+		}
+        /* $where = array(
+            'stu_prf_id_pk' => $id
+        );
+        $data['where'] = $where;
+
+        $data['user'] = $model->viewRow($where); */
+        
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        echo json_encode($data, JSON_NUMERIC_CHECK);
     }
 
 }

@@ -143,6 +143,54 @@ $routes->post('/api/section/delete/(:any)', 'Master::section/delete/$1'); // del
 $routes->put('/api/section/update/(:any)', 'Master::section/update/$1'); // update data
 $routes->delete('/api/section/delete/(:any)', 'Master::section/delete/$1'); // delete data
 
+$routes->get('/api/catagorytype', 'Master::catagorytype'); // getAll
+$routes->get('/api/catagorytype/(:any)', 'Master::catagorytype/$1'); // get by id
+$routes->post('/api/catagorytype/add', 'Master::catagorytype/add'); // Add data
+$routes->post('/api/catagorytype/update/(:any)', 'Master::catagorytype/update/$1'); // update data
+$routes->post('/api/catagorytype/delete/(:any)', 'Master::catagorytype/delete/$1'); // delete data
+$routes->put('/api/catagorytype/update/(:any)', 'Master::catagorytype/update/$1'); // update data
+$routes->delete('/api/catagorytype/delete/(:any)', 'Master::catagorytype/delete/$1'); // delete data
+
+$routes->get('/api/designationtype', 'Master::designationtype'); // getAll
+$routes->get('/api/designationtype/(:any)', 'Master::designationtype/$1'); // get by id
+$routes->post('/api/designationtype/add', 'Master::designationtype/add'); // Add data
+$routes->post('/api/designationtype/update/(:any)', 'Master::designationtype/update/$1'); // update data
+$routes->post('/api/designationtype/delete/(:any)', 'Master::designationtype/delete/$1'); // delete data
+$routes->put('/api/designationtype/update/(:any)', 'Master::designationtype/update/$1'); // update data
+$routes->delete('/api/designationtype/delete/(:any)', 'Master::designationtype/delete/$1'); // delete data
+
+$routes->get('/api/stafftype', 'Master::stafftype'); // getAll
+$routes->get('/api/stafftype/(:any)', 'Master::stafftype/$1'); // get by id
+$routes->post('/api/stafftype/add', 'Master::stafftype/add'); // Add data
+$routes->post('/api/stafftype/update/(:any)', 'Master::stafftype/update/$1'); // update data
+$routes->post('/api/stafftype/delete/(:any)', 'Master::stafftype/delete/$1'); // delete data
+$routes->put('/api/stafftype/update/(:any)', 'Master::stafftype/update/$1'); // update data
+$routes->delete('/api/stafftype/delete/(:any)', 'Master::stafftype/delete/$1'); // delete data
+
+$routes->get('/api/department', 'Master::department'); // getAll
+$routes->get('/api/department/(:any)', 'Master::department/$1'); // get by id
+$routes->post('/api/department/add', 'Master::department/add'); // Add data
+$routes->post('/api/department/update/(:any)', 'Master::department/update/$1'); // update data
+$routes->post('/api/department/delete/(:any)', 'Master::department/delete/$1'); // delete data
+$routes->put('/api/department/update/(:any)', 'Master::department/update/$1'); // update data
+$routes->delete('/api/department/delete/(:any)', 'Master::department/delete/$1'); // delete data
+
+$routes->get('/api/degree', 'Master::degree'); // getAll
+$routes->get('/api/degree/(:any)', 'Master::degree/$1'); // get by id
+$routes->post('/api/degree/add', 'Master::degree/add'); // Add data
+$routes->post('/api/degree/update/(:any)', 'Master::degree/update/$1'); // update data
+$routes->post('/api/degree/delete/(:any)', 'Master::degree/delete/$1'); // delete data
+$routes->put('/api/degree/update/(:any)', 'Master::degree/update/$1'); // update data
+$routes->delete('/api/degree/delete/(:any)', 'Master::degree/delete/$1'); // delete data
+
+$routes->get('/api/grade', 'Master::grade'); // getAll
+$routes->get('/api/grade/(:any)', 'Master::grade/$1'); // get by id
+$routes->post('/api/grade/add', 'Master::grade/add'); // Add data
+$routes->post('/api/grade/update/(:any)', 'Master::grade/update/$1'); // update data
+$routes->post('/api/grade/delete/(:any)', 'Master::grade/delete/$1'); // delete data
+$routes->put('/api/grade/update/(:any)', 'Master::grade/update/$1'); // update data
+$routes->delete('/api/grade/delete/(:any)', 'Master::grade/delete/$1'); // delete data
+
 
 //STUDENT API CALLs
 $routes->get('/api/students', 'Student::index');

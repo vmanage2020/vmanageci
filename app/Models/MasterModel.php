@@ -20,7 +20,15 @@ class MasterModel extends Model
     protected $table_Section = 'ac_ms_sections';
 	protected $table_School = 'ac_ms_college';
       
-  
+    protected $table_Catagorytype = "hr_ms_staff_catg";
+    protected $table_Designationtype = "hr_ms_staff_designation";
+    protected $table_Stafftype = "hr_ms_staff_type";
+    protected $table_Department = "hr_ms_dept_master";
+
+    protected $table_Degree = "hr_ms_course_master";
+    protected $table_Grade = "hr_ms_grade_master";
+
+
  /*Certificate */
  public function saveCertificateName($data)
  {
@@ -560,4 +568,244 @@ class MasterModel extends Model
      }
  
 
+
+     /* Catagorytype */
+     public function saveCatagorytype($data)
+     {
+         $query = $this->db->table($this->table_Catagorytype)->insert($data);
+         return $query;
+     }
+ 
+     public function updateCatagorytype($data, $id)
+     {
+         $query = $this->db->table($this->table_Catagorytype)->update($data, array('sct_id_pk' => $id));
+         return $query;
+     }
+ 
+     public function getCatagorytype($data)
+     {
+         $query = $this->db->query('select * from '.$this->table_Catagorytype.' where sct_id_pk='.$data.' order by sct_id_pk asc');
+         return $query->getResult();
+         /*
+         return  $this->db->table($this->table_Catagorytype)->where($data)
+         ->first();
+         */
+     }
+     
+     public function getCatagorytypes($status = false)
+     {
+         $query = $this->db->query('select * from '.$this->table_Catagorytype.' order by sct_id_pk asc');
+         return $query->getResult();
+         //$query = $this->db->table($this->table_Catagorytype)->findAll();
+         //return $query;
+     }
+ 
+     public function delCatagorytype($id)
+     {
+         $query = $this->db->query('delete from '.$this->table_Catagorytype.' where sct_id_pk='.$id.'');
+         return $query->getResult();
+         
+        //return $this->db->table($this->table_Catagorytype)->where($data)->delete(); 
+     }
+
+     
+     /* Designationtype */
+     public function saveDesignationtype($data)
+     {
+         $query = $this->db->table($this->table_Designationtype)->insert($data);
+         return $query;
+     }
+ 
+     public function updateDesignationtype($data, $id)
+     {
+         $query = $this->db->table($this->table_Designationtype)->update($data, array('dsg_id_pk' => $id));
+         return $query;
+     }
+ 
+     public function getDesignationtype($data)
+     {
+         $query = $this->db->query('select * from '.$this->table_Designationtype.' where dsg_id_pk='.$data.' order by dsg_id_pk asc');
+         return $query->getResult();
+         /*
+         return  $this->db->table($this->table_Designationtype)->where($data)
+         ->first();
+         */
+     }
+ 
+     public function getDesignationtypes($status = false)
+     {
+         $query = $this->db->query('select * from '.$this->table_Designationtype.' order by dsg_id_pk asc');
+         return $query->getResult();
+         //$query = $this->db->table($this->table_Designationtype)->findAll();
+         //return $query;
+     }
+ 
+     public function delDesignationtype($id)
+     {
+         $query = $this->db->query('delete from '.$this->table_Designationtype.' where dsg_id_pk='.$id.'');
+         return $query->getResult();
+         
+        //return $this->db->table($this->table_Designationtype)->where($data)->delete(); 
+     }
+
+
+     /* Stafftype */
+     public function saveStafftype($data)
+     {
+         $query = $this->db->table($this->table_Stafftype)->insert($data);
+         return $query;
+     }
+ 
+     public function updateStafftype($data, $id)
+     {
+         $query = $this->db->table($this->table_Stafftype)->update($data, array('stf_tye_id_pk' => $id));
+         return $query;
+     }
+ 
+     public function getStafftype($data)
+     {
+         $query = $this->db->query('select * from '.$this->table_Stafftype.' where stf_tye_id_pk='.$data.' order by stf_tye_id_pk asc');
+         return $query->getResult();
+         /*
+         return  $this->db->table($this->table_Stafftype)->where($data)
+         ->first();
+         */
+     }
+ 
+     public function getStafftypes($status = false)
+     {
+         $query = $this->db->query('select * from '.$this->table_Stafftype.' order by stf_tye_id_pk asc');
+         return $query->getResult();
+         //$query = $this->db->table($this->table_Stafftype)->findAll();
+         //return $query;
+     }
+ 
+     public function delStafftype($id)
+     {
+         $query = $this->db->query('delete from '.$this->table_Stafftype.' where stf_tye_id_pk='.$id.'');
+         return $query->getResult();
+         
+        //return $this->db->table($this->table_Stafftype)->where($data)->delete(); 
+     }
+
+     
+     /* Department */
+     public function saveDepartment($data)
+     {
+         $query = $this->db->table($this->table_Department)->insert($data);
+         return $query;
+     }
+ 
+     public function updateDepartment($data, $id)
+     {
+         $query = $this->db->table($this->table_Department)->update($data, array('dpt_id_pk' => $id));
+         return $query;
+     }
+ 
+     public function getDepartment($data)
+     {
+         $query = $this->db->query('select * from '.$this->table_Department.' where dpt_id_pk='.$data.' order by dpt_id_pk asc');
+         return $query->getResult();
+         /*
+         return  $this->db->table($this->table_Department)->where($data)
+         ->first();
+         */
+     }
+ 
+     public function getDepartments($status = false)
+     {
+         $query = $this->db->query('select * from '.$this->table_Department.' order by dpt_id_pk asc');
+         return $query->getResult();
+         //$query = $this->db->table($this->table_Department)->findAll();
+         //return $query;
+     }
+ 
+     public function delDepartment($id)
+     {
+         $query = $this->db->query('delete from '.$this->table_Department.' where dpt_id_pk='.$id.'');
+         return $query->getResult();
+         
+        //return $this->db->table($this->table_Department)->where($data)->delete(); 
+     }
+
+
+     /* Degree */
+     public function saveDegree($data)
+     {
+         $query = $this->db->table($this->table_Degree)->insert($data);
+         return $query;
+     }
+ 
+     public function updateDegree($data, $id)
+     {
+         $query = $this->db->table($this->table_Degree)->update($data, array('cor_id_pk' => $id));
+         return $query;
+     }
+ 
+     public function getDegree($data)
+     {
+         $query = $this->db->query('select * from '.$this->table_Degree.' where cor_id_pk='.$data.' order by cor_id_pk asc');
+         return $query->getResult();
+         /*
+         return  $this->db->table($this->table_Degree)->where($data)
+         ->first();
+         */
+     }
+ 
+     public function getDegrees($status = false)
+     {
+         $query = $this->db->query('select * from '.$this->table_Degree.' order by cor_id_pk asc');
+         return $query->getResult();
+         //$query = $this->db->table($this->table_Degree)->findAll();
+         //return $query;
+     }
+ 
+     public function delDegree($id)
+     {
+         $query = $this->db->query('delete from '.$this->table_Degree.' where cor_id_pk='.$id.'');
+         return $query->getResult();
+         
+        //return $this->db->table($this->table_Degree)->where($data)->delete(); 
+     }
+
+
+     /* Grade */
+     public function saveGrade($data)
+     {
+         $query = $this->db->table($this->table_Grade)->insert($data);
+         return $query;
+     }
+ 
+     public function updateGrade($data, $id)
+     {
+         $query = $this->db->table($this->table_Grade)->update($data, array('grd_id_pk' => $id));
+         return $query;
+     }
+ 
+     public function getGrade($data)
+     {
+         $query = $this->db->query('select * from '.$this->table_Grade.' where grd_id_pk='.$data.' order by grd_id_pk asc');
+         return $query->getResult();
+         /*
+         return  $this->db->table($this->table_Grade)->where($data)
+         ->first();
+         */
+     }
+ 
+     public function getGrades($status = false)
+     {
+         $query = $this->db->query('select * from '.$this->table_Grade.' order by grd_id_pk asc');
+         return $query->getResult();
+         //$query = $this->db->table($this->table_Grade)->findAll();
+         //return $query;
+     }
+ 
+     public function delGrade($id)
+     {
+         $query = $this->db->query('delete from '.$this->table_Grade.' where grd_id_pk='.$id.'');
+         return $query->getResult();
+         
+        //return $this->db->table($this->table_Grade)->where($data)->delete(); 
+     }
+     
 }
