@@ -1,11 +1,12 @@
 <?php namespace App\Controllers;
 
-use App\Models\StudentModel;
-use App\Models\StudentContactModel;
-use App\Models\StudentCertificateModel;
+use App\Models\StaffModel;
+use App\Models\StaffContactModel;
+use App\Models\StaffEducationModel;
+use App\Models\StaffExperienceModel;
 use CodeIgniter\Controller;
 
-class Student extends Controller {
+class STaff extends Controller {
  
 
     public function index()
@@ -608,8 +609,7 @@ class Student extends Controller {
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         echo json_encode($data, JSON_NUMERIC_CHECK);
 	}
-	
-	
+		
 	public function upload()
     {
 		
@@ -630,9 +630,7 @@ class Student extends Controller {
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         echo json_encode($data, JSON_NUMERIC_CHECK);
 	}
-    
-
-	
+    	
 	public function statusupdate($id,$status)
     {
 
@@ -771,7 +769,6 @@ class Student extends Controller {
 		
 	}
 
-
 	public function email() 
 	{
 
@@ -792,7 +789,6 @@ class Student extends Controller {
 		$email->send();
 
 	}
-
 
 	public function createemail($data) 
 	{

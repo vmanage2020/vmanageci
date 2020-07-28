@@ -211,6 +211,7 @@ $routes->get('/api/students/applicationpaid', 'Student::applicationpaid');
 $routes->get('/api/students/selected', 'Student::selected');
 $routes->get('/api/students/management', 'Student::management');
 
+$routes->get('/api/studentemail', 'Student::email');
 
 //UserGroup API CALLs
 $routes->get('/api/usergroups', 'Group::index');
@@ -230,6 +231,19 @@ $routes->post('/api/loginuser/delete/(:any)', 'User::delete/$1');
 $routes->put('/api/loginuser/(:any)', 'User::update/$1');
 $routes->delete('/api/loginuser/(:any)', 'User::delete/$1');
 
+
+
+//STAFF API CALLs
+$routes->get('/api/staffs', 'Staff::index');
+$routes->get('/api/staff/(:any)', 'Staff::view/$1');
+$routes->post('/api/staff', 'Staff::create');
+$routes->post('/api/staff/update/(:any)', 'Staff::update/$1');
+$routes->post('/api/staff/delete/(:any)', 'Staff::delete/$1');
+$routes->put('/api/staff/(:any)', 'Staff::update/$1');
+$routes->delete('/api/staff/(:any)', 'Staff::delete/$1');
+
+$routes->post('/api/staff/document', 'Staff::document');
+$routes->post('/api/staff/upload', 'Staff::upload');
 
 /**
  * --------------------------------------------------------------------
